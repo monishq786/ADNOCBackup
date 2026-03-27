@@ -1,0 +1,127 @@
+<mvc:View xmlns:cards="sap.f.cards"
+    xmlns:core="sap.ui.core"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m" controllerName="adnoc.vi.vehicleinspection.modone.controller.VisualInspection"
+    xmlns:html="http://www.w3.org/1999/xhtml"
+    xmlns:l="sap.ui.layout"
+    xmlns:grid="sap.ui.layout.cssgrid"
+    xmlns:f="sap.f">
+    <Page showHeader="true" class="cl_page" showFooter="false" enableScrolling="true" title="{i18n>visualIns_Title}">
+        <content>
+            <l:VerticalLayout width="100%" class="sapUiTinyMargin">
+                <l:BlockLayout background="Dashboard">
+                    <l:BlockLayoutRow >
+                        <l:BlockLayoutCell width="100%">
+                            <!-- Display Service Request Number and Exit button in the top section  -->
+                            <Toolbar width="100%">
+                                <Title text="{i18n>visualIns_ServiceReqNo} {VIRGlobalModel>/UpdatedDataModel/serviceRequestNo}" level="H3" />
+                                <ToolbarSpacer />
+                                <Button icon="sap-icon://nav-back" text="Back to Service Test" type="Transparent" width="auto" press="onBtnPressVisualInspectionExist" class="sapUiSmallMarginTop cl_Transparentbtn" />
+                            </Toolbar>
+                            <!-- Show tabs: Visual and Smart Form -->
+                            <VBox width="100%" visible="true">
+                                <HBox width="100%" alignItems="Center">
+                                    <IconTabBar id="innerIconTabBar" expandable="false" select="onTabsPressSmartFormVisual" visible="true">
+                                        <layoutData>
+                                            <FlexItemData growFactor="1" />
+                                        </layoutData>
+                                        <items>
+                                            <IconTabFilter key="tab1" text="{i18n>visualIns_VisualTab}">
+                                                <VBox id="fragmentContainer1"/>
+                                            </IconTabFilter>
+                                            <IconTabFilter key="tab2" text="{i18n>visualIns_SmartForm}" visible="{oGlobalModel>/isESMATab}">
+                                                <VBox id="fragmentContainer2"/>
+                                            </IconTabFilter>
+                                            <IconTabFilter key="tab3" text="{i18n>visualIns_SmartForm}" visible="{oGlobalModel>/isCOMTab}">
+                                                <VBox id="fragmentContainer3"/>
+                                            </IconTabFilter>
+                                            <IconTabFilter key="trafficTab" text="{i18n>visualIns_SmartForm}" visible="{oGlobalModel>/isTrafficTab}">
+                                                <VBox id="trafficFragmentContainer"/>
+                                            </IconTabFilter>
+                                            <IconTabFilter key="modifiedTab" text="{i18n>visualIns_SmartForm}" visible="{oGlobalModel>/isModifiedTab}">
+                                                <VBox id="modifiedFragmentContainer"/>
+                                            </IconTabFilter>
+                                            <IconTabFilter key="NotApplicableSmartFormId" text="{i18n>visualIns_SmartForm}" visible="{oGlobalModel>/IsNotApplicableSmartForm}">
+                                                <VBox id="NotApplicableSmartForm"/>
+                                            </IconTabFilter>
+                                        </items>
+                                    </IconTabBar>
+                                </HBox>
+                            </VBox>
+                            <!-- Show a message if Visual and Smart Form are not available; handled dynamically in the controller -->
+                            <VBox id="ValidMsgVboxId" class="sapUiSmallMargin" justifyContent="Center" alignItems="Center" height="20rem">
+                                <Text id="ValidationTextId" class="sapUiLargeMarginTop BoldMainCategory" />
+                            </VBox >
+                            <!-- Show the main category  -->
+                            <VBox id="VboxflexContainerId" height="21rem">
+                                <FlexBox wrap="Wrap" direction="Row" justifyContent="SpaceBetween" alignItems="Start" class="sapUiResponsiveMargin" height="25rem">
+                                    <VBox >
+                                        <layoutData>
+                                            <FlexItemData growFactor="1" shrinkFactor="1" baseSize="48%" minWidth="250px" />
+                                        </layoutData>
+                                        <HBox alignItems="Center" width="100%">
+                                            <Title text="{i18n>visualIns_MainCategory}" level="H3" class="sapUiSmallMarginTop" width="36rem">
+                                                <layoutData>
+                                                    <FlexItemData growFactor="1" />
+                                                </layoutData>
+                                            </Title>
+                                        </HBox>
+                                        <FlexBox wrap="Wrap" id="chipContainerId" items="{SearchViewModel>/surajDefectData}" class="sapUiSmallMarginTop">
+                                            <items>
+                                                <Button text="{SearchViewModel>testMainType}" type="{= ${SearchViewModel>Highlight} === 'None' ? 'Default' : 'Emphasized' }" enabled="{SearchViewModel>isEnableMainCategoryBtn}" press="handleMainTypeTextPress" class="cl_Emphasizebtn " />
+                                            </items>
+                                        </FlexBox>
+                                    </VBox>
+                                    <VBox class="myCustomBackground" height="20rem">
+                                        <layoutData>
+                                            <FlexItemData growFactor="1" shrinkFactor="1" baseSize="48%" minWidth="300px" />
+                                        </layoutData>
+                                        <!-- Show the sub category  -->
+                                        <VBox class="sapUiSmallMarginEnd">
+                                            <HBox alignItems="Center" width="auto">
+                                                <Title text="{i18n>visualIns_SubCategory}" level="H3" class="sapUiSmallMargin sapUiMediumMarginBegin" width="17rem">
+                                                    <layoutData>
+                                                        <FlexItemData growFactor="0" />
+                                                    </layoutData>
+                                                </Title>
+                                                <!-- Show the Summary button  -->
+                                                <Button text="{i18n>VehInfo_Summary}" icon="sap-icon://information" type="Emphasized" press="onBtnPressSummry" class="sapUiSmallMargin cl_Emphasizebtn sapUiLargeMarginBegin">
+                                                    <layoutData>
+                                                        <FlexItemData growFactor="0" />
+                                                    </layoutData>
+                                                </Button>
+                                            </HBox>
+                                            <Text id="txtMainTypeMsg" class="sapUiMediumMarginBegin BoldMainCategory" />
+                                        </VBox>
+                                        <!-- Display the sub-category checkbox -->
+                                        <ScrollContainer height="10rem" vertical="true" focusable="true" class="">
+                                            <List mode="None" visible="true" width="auto" items="{SearchViewModel>/SubCategory}" class="sapUiSmallMarginBegin" noDataText="Select the main category" showSeparators="None">
+                                                <CustomListItem class="grayListItem ">
+                                                    <Toolbar>
+                                                        <CheckBox id="CheckId" selected="{SearchViewModel>selected}" select="onCheckListSelect" />
+                                                        <VBox alignContent="Center" alignItems="Center" justifyContent="Center">
+                                                            <Text text="{SearchViewModel>testSubTypeTextEnglish}" wrapping="true"/>
+                                                        </VBox>
+                                                        <Button id="EditButtonId" icon="sap-icon://edit" enabled="true" press="onOpenDefects" visible="{= ${SearchViewModel>selected} === true }"/>
+                                                        <ToolbarSpacer />
+                                                        <Button icon="sap-icon://alert" press="onOpenDefects" visible="{= ${SearchViewModel>Visible} === true }" />
+                                                    </Toolbar>
+                                                </CustomListItem>
+                                            </List>
+                                        </ScrollContainer>
+                                        <!-- Buttons: Save, Confirm, and Show Uploaded File -->
+                                        <HBox class="cl_Emphasizebtn" justifyContent="End" alignItems="Center" width="100%">
+                                            <Button id="UploadFileBtnId" type="Emphasized" class="cl_Emphasizebtn sapUiTinyMarginBegin" text="{i18n>uploadFile}" press="onBtnPressPressViewFiles" />
+                                            <Button id="btnSave1" text="{i18n>save}" type="Emphasized" iconFirst="true" width="auto" iconDensityAware="false" press="onBtnPressSaveVisualTest" class="sapUiTinyMarginBegin cl_Emphasizebtn" />
+                                            <Button id="btnConfirm1" enabled="{SearchViewModel>/BtnEnabled}" text="{i18n>Confirm}" type="Emphasized" press="onBtnPressConfirmVisualTest" class="cl_Emphasizebtn sapUiTinyMarginBegin" />
+                                        </HBox>
+                                    </VBox>
+                                </FlexBox>
+                            </VBox>
+                        </l:BlockLayoutCell>
+                    </l:BlockLayoutRow>
+                </l:BlockLayout>
+            </l:VerticalLayout>
+        </content>
+    </Page>
+</mvc:View>

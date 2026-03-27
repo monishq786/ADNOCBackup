@@ -1,0 +1,72 @@
+{
+  "xsappname": "vehicleinspection",
+  "tenant-mode": "dedicated",
+  "description": "Security profile of called application",
+  "scopes": [
+    {
+      "name": "$XSAPPNAME.VEHICLEINSPECTION_SITE",
+      "description": "Able to View and Update the data from Services"
+    },
+    {
+      "name": "$XSAPPNAME.VEHICLEINSPECTION_JOBSCHEDULER",
+      "description": "Job Scheduler Scope",
+      "grant-as-authority-to-apps": [
+        "$XSSERVICENAME(vehicleinspectionscheduler)"
+      ]
+    },
+    {
+      "name": "uaa.user",
+      "description": "UAA"
+    }
+  ],
+  "role-templates": [
+    {
+      "name": "VEHICLEINSPECTION_SITE",
+      "description": "Able to View and Update the data from Services",
+      "default-role-name": "VEHICLEINSPECTION_SITE: Authorized to View and Update the Data from the Services",
+      "scope-references": [
+        "$XSAPPNAME.VEHICLEINSPECTION_SITE"
+      ],
+      "attribute-references": [
+        {
+          "name": "Site"
+        }
+      ]
+    },
+    {
+      "name": "VEHICLEINSPECTIONJOBS",
+      "description": "Job Scheduler Scope",
+      "scope-references": [
+        "$XSAPPNAME.VEHICLEINSPECTION_JOBSCHEDULER"
+      ]
+    },
+    {
+      "name": "Token_Exchange",
+      "description": "UAA",
+      "scope-references": [
+        "uaa.user"
+      ]
+    }
+  ],
+  "attributes": [
+    {
+      "name": "Site",
+      "description": "Site Name Property",
+      "valueType": "string"
+    }
+  ],
+  "authorities": [
+    "$ACCEPT_GRANTED_AUTHORITIES"
+  ],
+  "oauth2-configuration": {
+    "token-validity": 9000,
+    "redirect-uris": [
+      "https://*.cfapps.eu10.hana.ondemand.com/login/callback",
+      "https://*.applicationstudio.cloud.sap/**",
+      "https://localhost:5000/**",
+      "https://*.*.hana.ondemand.com/**",
+      "https://*.launchpad.cfapps.*.hana.ondemand.com/**"
+    ]
+  },
+  "xsenableasyncservice": "true"
+}

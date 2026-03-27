@@ -1,0 +1,176 @@
+{
+  "name": "VehicleInspection",
+  "version": "1.0.0",
+  "description": "A simple CAP project.",
+  "repository": "<Add your repository here>",
+  "license": "UNLICENSED",
+  "private": true,
+  "dependencies": {
+    "@cap-js-community/odata-v2-adapter": "^1.14.2",
+    "@cap-js/hana": "^1.9.1",
+    "@sap-cloud-sdk/connectivity": "^3.26.1",
+    "@sap-cloud-sdk/http-client": "^3.26.1",
+    "@sap-cloud-sdk/mail-client": "^3.24.0",
+    "@sap/cds": "^8",
+    "@sap/hana-client": "^2.26.18",
+    "@sap/hdi-deploy": "^5.4.2",
+    "@sap/xsenv": "^5.6.1",
+    "@sap/xssec": "^4",
+    "crypto-js": "^4.2.0",
+    "express": "^4",
+    "node-fetch": "^2.7.0",
+    "node-jose": "^2.2.0",
+    "pdf-lib": "^1.17.1"
+  },
+  "devDependencies": {
+    "@cap-js/cds-types": "^0.8.0",
+    "@cap-js/sqlite": "^1",
+    "@sap/cds-dk": "^8",
+    "mbt": "^1.2.29",
+    "rimraf": "^5.0.5"
+  },
+  "scripts": {
+    "start": "cds-serve",
+    "undeploy": "cf undeploy vehicleinspection --delete-services --delete-service-keys --delete-service-brokers",
+    "build": "rimraf resources mta_archives && mbt build --mtar archive",
+    "deploy": "cf deploy mta_archives/archive.mtar --retries 1",
+    "watch-vehicleinspection": "cds watch --open vehicleinspection/webapp/index.html?sap-ui-xx-viewCache=false"
+  },
+  "cds": {
+    "i18n": {
+      "folders": [
+        "_i18n",
+        "i18n"
+      ],
+      "languages": [
+        "en",
+        "hi"
+      ]
+    },
+    "server": {
+      "index": true,
+      "body_parser": {
+        "limit": "1000mb"
+      },
+      "log": {
+        "levels": {
+          "sqlite": "debug",
+          "cds": "info"
+        }
+      }
+    },
+    "requires": {
+      "db": {
+        "kind": "hana",
+        "pool": {
+          "acquireTimeoutMillis": 5000,
+          "min": 0,
+          "max": 100,
+          "fifo": true
+        }
+      },
+      "auth": "xsuaa",
+      "connectivity": true,
+      "destinations": true,
+      "CLM": {
+        "kind": "odata",
+        "csrf": true,
+        "credentials": {
+          "destination": "CPI_DEV_NEO_CLONING",
+          "[hybrid]": {
+            "destination": "CPI_NEO",
+            "csrf": true
+          },
+          "[QAS]": {
+            "destination": "CPI_NEO"
+          },
+          "[production]": {
+            "destination": "CPI_NEO"
+          }
+        }
+      },
+      "EMAIL": {
+        "kind": "odata",
+        "csrf": true,
+        "requestTimeout": 600000,
+        "credentials": {
+          "destination": "bpmworkflowruntime_mail",
+          "[hybrid]": {
+            "destination": "bpmworkflowruntime_mail",
+            "csrf": true
+          },
+          "[QAS]": {
+            "destination": "bpmworkflowruntime_mail"
+          },
+          "[production]": {
+            "destination": "bpmworkflowruntime_mail"
+          }
+        }
+      },
+      "CPI": {
+        "kind": "rest",
+        "csrf": true,
+        "requestTimeout": 600000,
+        "credentials": {
+          "destination": "CPI_NEO",
+          "[hybrid]": {
+            "destination": "CPI_NEO",
+            "csrf": true
+          },
+          "[QAS]": {
+            "destination": "CPI_NEO"
+          },
+          "[production]": {
+            "destination": "CPI_NEO"
+          }
+        }
+      },
+      "ADOBEREPORTS": {
+        "kind": "odata",
+        "csrf": true,
+        "credentials": {
+          "destination": "ADOBE_FORM_SERVICES",
+          "[hybrid]": {
+            "destination": "ADOBE_FORM_SERVICES",
+            "csrf": true
+          },
+          "[production]": {
+            "destination": "ADOBE_FORM_SERVICES"
+          }
+        }
+      },
+      "DMS": {
+        "kind": "odata",
+        "csrf": true,
+        "credentials": {
+          "destination": "DMSRepository",
+          "[hybrid]": {
+            "destination": "DMSRepository",
+            "csrf": true
+          },
+          "[production]": {
+            "destination": "DMSRepository"
+          }
+        }
+      },
+      "SAPWORKFLOW": {
+        "kind": "odata",
+        "csrf": true,
+        "credentials": {
+          "destination": "sap_process_automation_service",
+          "[hybrid]": {
+            "destination": "sap_process_automation_service",
+            "csrf": true
+          },
+          "[production]": {
+            "destination": "sap_process_automation_service"
+          }
+        }
+      },
+      "cloud-logging": true
+    },
+    "sql": {
+      "native_hana_associations": false
+    }
+  }
+}

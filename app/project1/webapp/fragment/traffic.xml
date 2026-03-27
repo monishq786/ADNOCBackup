@@ -1,0 +1,90 @@
+<core:FragmentDefinition xmlns="sap.m"
+    xmlns:core="sap.ui.core"
+    xmlns:f="sap.ui.layout.form"
+    xmlns:l="sap.ui.layout"
+    xmlns:u="sap.ui.unified"
+    xmlns:commons="sap.suite.ui.commons"
+    xmlns:ui="sap.ui.table"
+    xmlns:card="sap.f.cards"
+    xmlns:rowmodes="sap.ui.table.rowmodes"
+    xmlns:mvc="sap.ui.core.mvc">
+    <VBox class="sapUiContentPadding service_test" id="tab_trafficTestDialog_V2">
+
+        <!-- <Toolbar>
+            <ToolbarSpacer/>
+            <Text text="{i18n>traffic_Title}" textAlign="Center" class="Cl_Dialog_titile"/>
+            <ToolbarSpacer/>
+            <Button icon="sap-icon://decline" type="Neutral" press="onBtnPressCloseTraffic" class="cl_Neutralbtn"/>
+        </Toolbar> -->
+        <ScrollContainer horizontal="false" vertical="true" focusable="true" height="20rem">
+            <VBox id="tab_idPanelContainer" items="{treeModel>/responseArray}" class="sapUiSmallPadding">
+                <Panel expandable="true" expanded="false" width="auto" backgroundDesign="Transparent">
+                    <headerToolbar>
+                        <Toolbar>
+                            <Text text="{treeModel>testMainTypeTextEnglish}" class="header_title"/>
+                            <ToolbarSpacer />
+                            <Text text="{treeModel>testMainTypeTextArabic}" textAlign="End" class="sapUiTinyMarginEnd header_title" />
+                        </Toolbar>
+                    </headerToolbar>
+                    <VBox class="sapUiTinyMargin" items="{treeModel>children}">
+                        <FlexBox alignItems="Start" justifyContent="SpaceBetween" direction="Row" width="100%">
+
+                            <!-- Left: English Text + Radio Buttons stacked -->
+                            <VBox>
+                                <!-- English Label -->
+                                <Text text="{treeModel>testMainTypeTextEnglish}" textAlign="Begin" class="header_title_Main_Category"/>
+
+                                <!-- Radio Buttons aligned below the label -->
+                                <HBox wrap="Wrap">
+                                    <RadioButton class="sapUiTinyMarginEnd" text="{treeModel>controlTypeValueLabel1Text}" selected="{= ${treeModel>controlTypeValueLabel1} === 'YES'}" select="onRadioSelectTrafficTest" groupName="{= ${treeModel>id} + '_groupB' }" visible="{= !${treeModel>isParent} }" enabled="{ButtonVisibleModel>/isControlEditable}">
+                                        <customData>
+                                            <core:CustomData key="prop" value="controlTypeValueLabel1"/>
+                                        </customData>
+                                    </RadioButton>
+
+                                    <RadioButton class="sapUiTinyMarginEnd" text="{treeModel>controlTypeValueLabel2Text}" selected="{= ${treeModel>controlTypeValueLabel2} === 'YES'}" select="onRadioSelectTrafficTest" groupName="{= ${treeModel>id} + '_groupB' }" visible="{= !${treeModel>isParent} }" enabled="{ButtonVisibleModel>/isControlEditable}">
+                                        <customData>
+                                            <core:CustomData key="prop" value="controlTypeValueLabel2"/>
+                                        </customData>
+                                    </RadioButton>
+                                    <Text text="|" class="sapUiTinyMarginBegin sapUiTinyMarginEnd separator" />
+                                    <RadioButton class="sapUiTinyMarginEnd" text="{treeModel>controlTypeValueLabel3Text}" selected="{= ${treeModel>controlTypeValueLabel3} === 'YES'}" select="onRadioSelectTrafficTest" groupName="{= ${treeModel>id} + '_groupA' }" visible="{= !${treeModel>isParent} }" enabled="{ButtonVisibleModel>/isControlEditable}">
+                                        <customData>
+                                            <core:CustomData key="prop" value="controlTypeValueLabel3"/>
+                                        </customData>
+                                    </RadioButton>
+
+                                    <RadioButton class="sapUiTinyMarginEnd" text="{treeModel>controlTypeValueLabel4Text}" selected="{= ${treeModel>controlTypeValueLabel4} === 'YES'}" select="onRadioSelectTrafficTest" groupName="{= ${treeModel>id} + '_groupA' }" visible="{= !${treeModel>isParent} }" enabled="{ButtonVisibleModel>/isControlEditable}">
+                                        <customData>
+                                            <core:CustomData key="prop" value="controlTypeValueLabel4"/>
+                                        </customData>
+                                    </RadioButton>
+                                </HBox>
+                            </VBox>
+
+                            <!-- Right: Arabic Text -->
+                            <Text text="{treeModel>testMainTypeTextArabic}" textAlign="End"/>
+                        </FlexBox>
+                    </VBox>
+                </Panel>
+            </VBox>
+        </ScrollContainer>
+        <VBox>
+            <TextArea value="{trafficCommentModel>/testComments}" rows="3" placeholder="{i18n>CComents}" width="100%" height="10vh" enabled="{ButtonVisibleModel>/isControlEditable}" class="sapUiSmallMarginBottom" maxLength="200"/>
+        </VBox>
+
+        <OverflowToolbar id="tab_trafficFooter">
+            <Label text="{i18n>traffic_ModifyAt}" textAlign="Initial"/>
+            <Input value="{trafficCommentModel>/testInspectionEndDate}" editable="false" width="auto" />
+            <Label text="{i18n>traffic_ModifyBy}" textAlign="Initial"/>
+            <Input value="{trafficCommentModel>/testInspectedBy}" editable="false" width="auto" />
+            <ToolbarSpacer />
+            <Button id="tab_SaveTraffic_Id" type="Emphasized" class="cl_Emphasizebtn" text="{i18n>save}" press="onBtnPressSaveTrafficTest" visible="{= ${oGlobalModel>/isButtonSave} }"/>
+            <Button id="tab_ApprovalTraffic_Id" type="Emphasized" class="cl_Emphasizebtn" text="{i18n>traffic_SendForApproval}" press="onBtnPressConfirmTrafficTest" visible="{= ${oGlobalModel>/isButtonApproval} }"/>
+            <Button id="tab_ConfirmTraffic_Id" type="Emphasized" class="cl_Emphasizebtn" text="{i18n>traffic_Confirm}" press="onBtnPressConfirmTrafficTest" visible="{= ${oGlobalModel>/isButtonConfirm} }"/>
+            <Button type="Emphasized" class="cl_Emphasizebtn" text="{i18n>uploadFileTraffic}" press="onBtnPressFileUpload" visible="{= ${oGlobalModel>/isButtonFileUpload} }"/>
+            <Button type="Emphasized" class="cl_Emphasizebtn" text="{i18n>viewFiles}" press="onBtnPressViewFiles"/>
+            <Button type="Emphasized" class="cl_Emphasizebtn" text="{i18n>traffic_ApprovalHistory}" press="onBtnPressApprovalHistory" visible="{= ${oGlobalModel>/isAppHistoryBtnShow} }"/>
+        </OverflowToolbar>
+    </VBox>
+</core:FragmentDefinition>

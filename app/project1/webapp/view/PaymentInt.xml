@@ -1,0 +1,734 @@
+<mvc:View xmlns="sap.m"
+    xmlns:core="sap.ui.core"
+    xmlns:l="sap.ui.layout"
+    xmlns:ndc="sap.ndc"
+    xmlns:uxap="sap.uxap"
+    xmlns:layout="sap.ui.layout"
+    xmlns:table="sap.ui.table"
+    xmlns:f="sap.ui.layout.form"
+    xmlns:card="sap.f.cards"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns:grid="sap.ui.layout.cssgrid" controllerName="adnoc.vi.vehicleinspection.modone.controller.PaymentIntegration"
+    xmlns:form="sap.ui.layout.form">
+    <Page id="PaymentIntegration" showFooter="false" showHeader="false" class="cl_page" showNavButton="false" navButtonPress="">
+
+        <IconTabBar id="CartIconTabbar" selectedKey="Cart" select="checkTabSelection" expandable="false" class="Cl_TabbarTextBold Cl_CartIconTab Cl_CartList">
+            <items>
+                <IconTabFilter text="{i18n>paymentIntegration_cartItems}" key="Cart" count="{SalesOrderCardDataModel>/CartTotalItem}" icon="sap-icon://cart-approval">
+                    <l:VerticalLayout id="containerLayoutCart" width="100%" class="cartlayout">
+                        <l:BlockLayout background="Dashboard">
+                            <l:BlockLayoutRow accentCells="Accent3">
+                                <l:BlockLayoutCell width="3" id="Accent3">
+                                    <HBox>
+                                        <Title text="{i18n>paymentIntegration_cart_title}" level="H3" class="header_title"/>
+                                    </HBox>
+                                    <ScrollContainer horizontal="true" vertical="true" focusable="true" height="21rem" width="auto">
+                                        <Table id="cartTable" items="{SalesOrderCardDataModel>/MyCartItems}" noDataText="No Data" fixedLayout="true" visible="true" growing="true" growingThreshold="100" growingScrollToLoad="false" sticky="ColumnHeaders,HeaderToolbar" alternateRowColors="false" popinLayout="GridSmall">
+                                            <columns>
+                                                <Column width="8rem" hAlign="Begin" vAlign="Middle" minScreenWidth="Tablet" demandPopin="true" mergeDuplicates="false" visible="{= ${oGlobalModel>/isServicePage} }">
+                                                    <header>
+                                                        <Text text="{i18n>paymentIntegration_PlateInto}" wrapping="true" textAlign="Begin" textDirection="Inherit" visible="true"/>
+                                                    </header>
+                                                </Column>
+                                                <Column width="8rem" hAlign="Begin" vAlign="Middle" minScreenWidth="Tablet" demandPopin="true" mergeDuplicates="false">
+                                                    <header>
+                                                        <Text text="{i18n>paymentIntegration_TestName}" wrapping="true" textAlign="Begin" textDirection="Inherit" visible="true"/>
+                                                    </header>
+                                                </Column>
+                                                <Column width="6rem" hAlign="End" vAlign="Middle" minScreenWidth="Tablet" demandPopin="true" mergeDuplicates="false">
+                                                    <header>
+                                                        <Text text="{i18n>paymentIntegration_Net}" wrapping="true" textAlign="Begin" textDirection="RTL" visible="true"/>
+                                                    </header>
+                                                </Column>
+                                                <Column width="6rem" hAlign="End" vAlign="Middle" minScreenWidth="Tablet" demandPopin="true" mergeDuplicates="false">
+                                                    <header>
+                                                        <Text text="{i18n>paymentIntegration_Vat}" wrapping="true" textAlign="Center" textDirection="RTL" visible="true"/>
+                                                    </header>
+                                                </Column>
+                                                <Column width="6rem" hAlign="End" vAlign="Middle" minScreenWidth="Tablet" demandPopin="true" mergeDuplicates="false">
+                                                    <header>
+                                                        <Text text="{i18n>paymentIntegration_Discount}" wrapping="true" textAlign="Center" textDirection="RTL" visible="true"/>
+                                                    </header>
+                                                </Column>
+                                                <Column width="7rem" hAlign="Center" vAlign="Middle" minScreenWidth="Tablet" demandPopin="true" mergeDuplicates="false">
+                                                    <header>
+                                                        <Text text="{i18n>paymentIntegration_Quantity}" wrapping="true" textAlign="Center" textDirection="Inherit" visible="true"/>
+                                                    </header>
+                                                </Column>
+
+                                                <Column width="5rem" hAlign="End" vAlign="Middle" minScreenWidth="Tablet" demandPopin="true" mergeDuplicates="false">
+                                                    <header>
+                                                        <Text text="{i18n>paymentIntegration_Total}" wrapping="true" textAlign="End" textDirection="RTL" visible="true"/>
+                                                    </header>
+                                                </Column>
+                                                <Column width="5rem" hAlign="Center" vAlign="Middle" minScreenWidth="Tablet" demandPopin="true" mergeDuplicates="false" visible="{= ${oGlobalModel>/isServicePage} }">
+                                                    <header>
+                                                        <Text text="{i18n>paymentIntegration_Remove}" wrapping="true" textAlign="Begin" textDirection="Inherit" visible="{= ${oGlobalModel>/isServicePage} }"/>
+                                                    </header>
+                                                </Column>
+                                                <Column width="5rem" hAlign="Center" vAlign="Middle" minScreenWidth="Tablet" demandPopin="true" mergeDuplicates="false" visible="{= ${oGlobalModel>/isAccessoriesPage} }">
+                                                    <header>
+                                                        <Text text="{i18n>paymentIntegration_Remove}" wrapping="true" textAlign="Begin" textDirection="Inherit" visible="{= ${oGlobalModel>/isAccessoriesPage} }"/>
+                                                    </header>
+                                                </Column>
+                                            </columns>
+                                            <items>
+                                                <ColumnListItem>
+                                                    <cells>
+                                                        <ObjectStatus text="{SalesOrderCardDataModel>PlateNo}/{SalesOrderCardDataModel>PlateCodeName}" state="Information" />
+                                                        <Text text="{SalesOrderCardDataModel>ServiceName}" />
+                                                        <ObjectStatus text="{SalesOrderCardDataModel>TotalWithOutVAT}" state="None" icon="{imageModel>/path}/image/AEDCurrencyBlue.svg"/>
+                                                        <ObjectStatus text="{SalesOrderCardDataModel>VAT}" state="None" icon="{imageModel>/path}/image/AEDCurrencyBlue.svg"/>
+                                                        <ObjectStatus text="{SalesOrderCardDataModel>DiscountAmount}" state="None" icon="{imageModel>/path}/image/AEDCurrencyBlue.svg"/>
+                                                        <VBox>
+                                                            <Text text="{SalesOrderCardDataModel>Qty}" visible="{= ${SalesOrderCardDataModel>MaterialType} !== 'ZVCM'}" textAlign="End"/>
+                                                            <StepInput value="{SalesOrderCardDataModel>Qty}" textAlign="Center" displayValuePrecision="0" min="1" max="99" editable="true" visible="{= ${SalesOrderCardDataModel>MaterialType} === 'ZVCM'}" change="onBtnPressChangeQty" />
+                                                        </VBox>
+                                                        <ObjectStatus text="{SalesOrderCardDataModel>TotalAmount}" state="Information" icon="{imageModel>/path}/image/AEDCurrencyBlue.svg"/>
+                                                        <Button icon="{imageModel>/path}/image/deletebtntable.svg" type="Transparent" press="onBtnPressDeleteForService" class="cl_TransparentIconFix" visible="{= ${oGlobalModel>/isServicePage} }"/>
+                                                        <Button icon="{imageModel>/path}/image/deletebtntable.svg" type="Transparent" press="onBtnPressDeleteForAccessories" class="cl_TransparentIconFix" visible="{= ${oGlobalModel>/isAccessoriesPage} }"/>
+                                                    </cells>
+                                                </ColumnListItem>
+                                            </items>
+                                        </Table>
+                                    </ScrollContainer>
+
+                                </l:BlockLayoutCell>
+                                <l:BlockLayoutCell width="1" id="Accent4" class="cartlayout2">
+                                    <VBox>
+                                        <Title text="{i18n>paymentIntegration_OrderSummery}" level="H3" class="header_title"/>
+                                    </VBox>
+                                    <FlexBox direction="Column" class="sapUiDemoFlexBoxSizeAdjustmentsZeroWidthItems" renderType="Div" alignItems="Stretch" justifyContent="Start">
+                                        <!-- Row: Subtotal -->
+                                        <HBox justifyContent="SpaceBetween" width="100%">
+                                            <Text text="{i18n>paymentIntegration_Subtotal}" class="label_font"/>
+                                            <HBox alignItems="Center" justifyContent="End">
+                                                <Image height="0.7rem" src="{imageModel>/path}/image/Dirham.png" class="sapUiTinyMarginRight Cl_DirahamIcon" />
+                                                <Text text="{SalesOrderCardDataModel>/SubTotal}" class="label_amount_font"/>
+                                            </HBox>
+                                        </HBox>
+
+                                        <!-- Row: Promotional Discount -->
+                                        <HBox justifyContent="SpaceBetween" width="100%">
+                                            <Text text="{i18n>paymentIntegration_PromotionalDis}" class="label_font"/>
+                                            <HBox alignItems="Center" justifyContent="End">
+                                                <Image height="0.7rem" src="{imageModel>/path}/image/Dirham.png" class="sapUiTinyMarginRight Cl_DirahamIcon" />
+                                                <Text text="{SalesOrderCardDataModel>/DiscountAmount}" class="label_amount_font"/>
+                                            </HBox>
+
+                                        </HBox>
+
+                                        <!-- Row: Subtotal after discount -->
+                                        <HBox justifyContent="SpaceBetween" width="100%">
+                                            <Text text="{i18n>paymentIntegration_Subtotal_dis}" class="label_font"/>
+                                            <HBox alignItems="Center" justifyContent="End">
+                                                <Image height="0.7rem" src="{imageModel>/path}/image/Dirham.png" class="sapUiTinyMarginRight Cl_DirahamIcon" />
+                                                <Text text="{SalesOrderCardDataModel>/SubTotalAfterDis}" class="label_amount_font"/>
+                                            </HBox>
+
+                                        </HBox>
+
+                                        <!-- VAT Box -->
+                                        <HBox class="vatBox sapUiTinyMarginTop" justifyContent="SpaceBetween" width="100%">
+                                            <Text text="{i18n>paymentIntegration_VATAmt}" class="label_font"/>
+                                            <HBox alignItems="Center" justifyContent="End">
+                                                <Image height="0.7rem" src="{imageModel>/path}/image/Dirham.png" class="sapUiTinyMarginRight Cl_DirahamIcon" />
+                                                <Text text="{SalesOrderCardDataModel>/VatAmount}" class="label_amount_font"/>
+                                            </HBox>
+                                        </HBox>
+
+                                        <!-- Coupon Section -->
+                                        <Text text="{i18n>paymentIntegration_Havecoupon}" class="sapUiTinyMarginTop label_amount_font" />
+                                        <VBox class="couponBox sapUiTinyMarginTop" width="100%">
+                                            <HBox width="100%" alignItems="Center">
+                                                <Input placeholder="{i18n>paymentIntegration_EnterCoupon}" value="{oGlobalModel>/Coupon_Number}" liveChange="oncouponLivechange" change="oncouponchangeevent" width="100%" showValueHelp="true" valueHelpIconSrc="sap-icon://accept"/>
+                                                <ndc:BarcodeScannerButton id="sampleBarcodeScannerButton" scanSuccess="onScanCouponSuccess" scanFail="onScanCouponError" dialogTitle="Coupon" class="sapUiTinyMarginBegin"/>
+                                                <Button text="{i18n>paymentIntegration_Apply}" class="sapUiTinyMarginBegin cl_Transparentbtn" type="Transparent" press="onBtnPressApplyDiscount" visible="{= ${oGlobalModel>/isCouponApplied} === false }" />
+                                                <Button text="{i18n>paymentIntegration_Remove}" class="sapUiTinyMarginBegin cl_Transparentbtn" type="Transparent" press="onBtnPressRemoveCoupon" visible="{oGlobalModel>/isCouponApplied}"/>
+                                            </HBox>
+
+                                            <HBox justifyContent="SpaceBetween" width="100%" class="sapUiTinyMarginTop" visible="{oGlobalModel>/isCouponApplied}">
+                                                <VBox>
+                                                    <Text text="{i18n>paymentIntegration_Coupondetails}" class="label_font"/>
+                                                    <ObjectStatus class="sapUiSmallMarginBottom" text="{oGlobalModel>/Coupon_Msg}" icon="sap-icon://sys-enter-2" state="Success" inverted="true"/>
+                                                </VBox>
+
+                                                <VBox alignItems="End">
+                                                    <Text text="{i18n>paymentIntegration_Amountsaved}" class="label_font" />
+                                                    <HBox alignItems="Center" justifyContent="End">
+                                                        <Image height="0.9rem" src="{imageModel>/path}/image/AEDCurrencyBlue.svg" class="sapUiTinyMarginRight Cl_DirahamIcon" />
+                                                        <Text text="{oGlobalModel>/Coupon_SavedAmt}" class="grandTotalText"/>
+                                                    </HBox>
+
+                                                </VBox>
+                                            </HBox>
+                                        </VBox>
+
+                                        <!-- Grand Total -->
+                                        <HBox justifyContent="SpaceBetween" width="100%" class="totalBox sapUiSmallMarginTop">
+                                            <Text text="{i18n>paymentIntegration_GrandTotal}" class="grandTotalText" />
+                                            <HBox alignItems="Center" justifyContent="End">
+                                                <Image height="0.9rem" src="{imageModel>/path}/image/AEDCurrencyBlue.svg" class="sapUiTinyMarginRight Cl_DirahamIcon" />
+                                                <Text text="{SalesOrderCardDataModel>/SubTotalAfterDis}" class="grandTotalAmount" />
+                                            </HBox>
+                                        </HBox>
+
+                                        <!-- Action Buttons -->
+                                        <HBox justifyContent="Center" width="100%" class="sapUiSmallMarginTop">
+                                            <Button text="{i18n>paymentIntegration_Proceed}" width="100%" type="Emphasized" class="cl_Emphasizebtn sapUiSmallMarginEnd" press="onBtnPressProceed" visible="{= !${ButtonVisibleModel>/UpdatebtnVisible} }">
+                                                <layoutData>
+                                                    <FlexItemData growFactor="1" />
+                                                </layoutData>
+                                            </Button>
+
+                                            <Button text="{i18n>paymentIntegration_Update}" type="Emphasized" iconFirst="true" width="auto" iconDensityAware="false" press="onBtnPressUpdateSalesOrder" class="sapUiTinyMarginEnd cl_Emphasizebtn" visible="{ButtonVisibleModel>/UpdatebtnVisible}">
+                                                <layoutData>
+                                                    <FlexItemData growFactor="1" />
+                                                </layoutData>
+                                            </Button>
+
+                                            <Button text="{i18n>paymentIntegration_AddMore}" width="100%" type="Transparent" class="sapUiSmallMarginEnd sapUiTinyMarginBegin cl_Transparentbtn" press="onBtnPressBackFromCart" icon="sap-icon://add-equipment">
+                                                <layoutData>
+                                                    <FlexItemData growFactor="1" />
+                                                </layoutData>
+                                            </Button>
+                                        </HBox>
+                                    </FlexBox>
+
+                                </l:BlockLayoutCell>
+                            </l:BlockLayoutRow>
+                        </l:BlockLayout>
+
+                    </l:VerticalLayout>
+
+                </IconTabFilter>
+
+                <IconTabFilter text="{i18n>paymentIntegration_payment}" key="Payment" icon="sap-icon://currency">
+
+                    <l:VerticalLayout id="containerLayoutPayment" width="100%" class="cartlayout">
+                        <l:BlockLayout background="Dashboard">
+                            <l:BlockLayoutRow accentCells="Accent1">
+                                <l:BlockLayoutCell width="3">
+                                    <VBox>
+                                        <Title text="{i18n>paymentIntegration_ModePayments}" level="H3" class="header_title"/>
+                                        <Label text="{i18n>paymentIntegration_AvailablePayment}" class="label_font"/>
+                                    </VBox>
+                                    <FlexBox direction="Column" alignItems="Stretch" justifyContent="Center" width="100%">
+
+                                        <ScrollContainer horizontal="false" vertical="true" focusable="true" height="22rem">
+                                            <!--Cash MOP-->
+                                            <Panel visible="{ServicesViewModel>/MOPVisible}" stickyHeader="true" expandable="true" expand="onExpandCash" expanded="{ServicesViewModel>/CashMOPPanelExpand}" width="auto" class="sapUiTinyMarginBeginEnd Cl_Panel" expandAnimation="true">
+                                                <headerToolbar>
+                                                    <OverflowToolbar height="3rem" style="Clear">
+                                                        <!-- <CheckBox valueState="Information" enabled="true" selected="{ServicesViewModel>/Cash_CheckBoxSeleted}" select="onPressCashSelect" class="Cl_SearchCusFormLabel Cl_CheckBox" /> -->
+                                                        <Button icon="sap-icon://currency" />
+                                                        <Title text="{i18n>paymentIntegration_MOPCash}" class="panel_font"/>
+                                                    </OverflowToolbar>
+                                                </headerToolbar>
+                                                <content>
+                                                    <form:Form editable="true" visible="{ServicesViewModel>/Cash_MOPForm}" class="Cl_SearchCusFormLabel">
+                                                        <form:layout>
+                                                            <form:ResponsiveGridLayout labelSpanXL="1" labelSpanL="3" labelSpanM="3" labelSpanS="12" adjustLabelSpan="true" emptySpanXL="0" emptySpanL="3" emptySpanM="0" emptySpanS="0" columnsXL="1" columnsL="1" columnsM="1" singleContainerFullSize="false" />
+                                                        </form:layout>
+                                                        <form:formContainers>
+                                                            <form:FormContainer>
+                                                                <form:formElements>
+                                                                    <form:FormElement label="{i18n>paymentIntegration_AED}">
+                                                                        <form:fields>
+                                                                            <Input value="{ServicesViewModel>/Cashamount}" type="Tel" placeholder="{i18n>paymentIntegration_Amount}" valueState="Information" liveChange="onlivechangeamount" valueStateText="Cash Amount" class="Cl_CCInput">
+                                                                                <layoutData>
+                                                                                    <l:GridData span="XL1 L1 M4 S4" />
+                                                                                </layoutData>
+                                                                            </Input>
+                                                                        </form:fields>
+                                                                    </form:FormElement>
+                                                                </form:formElements>
+                                                            </form:FormContainer>
+                                                        </form:formContainers>
+                                                    </form:Form>
+                                                </content>
+                                            </Panel>
+
+                                            <!-- Card Mop -->
+                                            <Panel visible="{ServicesViewModel>/MOPVisible}" expandable="true" expand="onExpandCard" expanded="{ServicesViewModel>/CardMOPPanelExpand}" width="auto" class="sapUiTinyMarginBeginEnd Cl_Panel" expandAnimation="true">
+                                                <headerToolbar>
+                                                    <OverflowToolbar height="3rem">
+                                                        <!-- <CheckBox valueState="Information" enabled="true" selected="{ServicesViewModel>/Card_CheckBoxSeleted}" select="onPressCardSelect" class="Cl_CheckBox" /> -->
+                                                        <Button icon="sap-icon://credit-card" />
+                                                        <Title text="{i18n>paymentIntegration_MOPCard}" class="panel_font"/>
+                                                        <Image src="{imageModel>/path}/image/mastercard.svg"/>
+                                                        <Image src="{imageModel>/path}/image/americancard.svg"/>
+                                                        <Image src="{imageModel>/path}/image/visa.svg"/>
+                                                    </OverflowToolbar>
+                                                </headerToolbar>
+                                                <content>
+                                                    <form:Form editable="true" class="Cl_SearchCusFormLabel">
+                                                        <form:layout>
+                                                            <form:ResponsiveGridLayout labelSpanXL="1" labelSpanL="3" labelSpanM="3" labelSpanS="12" adjustLabelSpan="false" emptySpanXL="4" emptySpanL="4" emptySpanM="4" emptySpanS="0" columnsXL="1" columnsL="1" columnsM="1" singleContainerFullSize="false" />
+                                                        </form:layout>
+                                                        <form:formContainers>
+                                                            <form:FormContainer>
+                                                                <form:formElements>
+                                                                    <form:FormElement label="{i18n>paymentIntegration_AED}">
+                                                                        <form:fields>
+                                                                            <Input value="{ServicesViewModel>/CardAmount}" type="Tel" placeholder="{i18n>paymentIntegration_Amount}" valueState="Information" liveChange="onlivechangeamount" valueStateText="Card Amount" class="Cl_CCInput">
+                                                                                <layoutData>
+                                                                                    <l:GridData span="XL2 L2 M4 S4" />
+                                                                                </layoutData>
+                                                                            </Input>
+                                                                        </form:fields>
+                                                                    </form:FormElement>
+                                                                </form:formElements>
+                                                            </form:FormContainer>
+                                                        </form:formContainers>
+                                                    </form:Form>
+                                                </content>
+                                            </Panel>
+                                            <!-- Aanipay -->
+                                            <Panel visible="false" expandable="true" expand="onExpandAaniPay" expanded="{ServicesViewModel>/AanipayMOPPanelExpand}" width="auto" class="sapUiTinyMarginBeginEnd Cl_Panel" expandAnimation="true">
+                                                <headerToolbar>
+                                                    <OverflowToolbar height="3rem">
+                                                        <!-- <CheckBox valueState="Information" enabled="true" selected="{ServicesViewModel>/Aanipay_CheckBoxSeleted}" select="onPressAanipaySelect" class="Cl_CheckBox" /> -->
+                                                        <Button icon="sap-icon://bar-code" />
+                                                        <Title text="{i18n>paymentIntegration_AaniPay}" class="panel_font"/>
+                                                        <Image src="{imageModel>/path}/image/aanipay.svg" width="50px" height="20px" />
+                                                    </OverflowToolbar>
+                                                </headerToolbar>
+                                                <content>
+                                                    <form:Form editable="true" class="Cl_SearchCusFormLabel">
+                                                        <form:layout>
+                                                            <form:ResponsiveGridLayout labelSpanXL="1" labelSpanL="3" labelSpanM="3" labelSpanS="12" adjustLabelSpan="false" emptySpanXL="4" emptySpanL="4" emptySpanM="4" emptySpanS="0" columnsXL="1" columnsL="1" columnsM="1" singleContainerFullSize="false" />
+                                                        </form:layout>
+                                                        <form:formContainers>
+                                                            <form:FormContainer>
+                                                                <form:formElements>
+                                                                    <form:FormElement label="{i18n>paymentIntegration_AED}">
+                                                                        <form:fields>
+                                                                            <Input value="{ServicesViewModel>/AaniPayAmount}" type="Tel" placeholder="{i18n>paymentIntegration_Amount}" valueState="Information" liveChange="onlivechangeamount" valueStateText="Aani Pay Amount" class="Cl_CCInput">
+                                                                                <layoutData>
+                                                                                    <l:GridData span="XL2 L2 M4 S4" />
+                                                                                </layoutData>
+                                                                            </Input>
+                                                                        </form:fields>
+                                                                    </form:FormElement>
+                                                                </form:formElements>
+                                                            </form:FormContainer>
+                                                        </form:formContainers>
+                                                    </form:Form>
+                                                </content>
+                                            </Panel>
+
+                                            <!--Loyalty MOP-->
+                                            <Panel visible="{ServicesViewModel>/MOPVisible}" stickyHeader="true" expandable="true" expand="onExpandLoyaltyNew" expanded="{ServicesViewModel>/LoyaltyMOPPanelExpand}" width="auto" class="sapUiTinyMarginBeginEnd Cl_Panel" expandAnimation="true">
+                                                <headerToolbar>
+                                                    <OverflowToolbar height="3rem" style="Clear">
+                                                        <!-- <CheckBox valueState="Information" enabled="true" selected="{ServicesViewModel>/Loyalty_CheckBoxSeleted}" select="onExpandLoyaltyNew" class="Cl_CheckBox" /> -->
+                                                        <Button icon="sap-icon://bo-strategy-management" />
+                                                        <Title text="{i18n>paymentIntegration_MOPLoyalty}" class="panel_font"/>
+                                                    </OverflowToolbar>
+                                                </headerToolbar>
+                                                <content>
+                                                    <VBox>
+                                                        <HBox>
+                                                            <Button text="{i18n>paymentIntegration_AddLoyality}" press="onPressCheckCard" type="Emphasized" class="cl_Emphasizebtn sapUiTinyMarginBegin" />
+                                                            <ToolbarSpacer />
+                                                            <Button type="Emphasized" press="onResetLoyalty" icon="sap-icon://reset" class="cl_Emphasizebtn sapUiTinyMarginBegin" />
+                                                        </HBox>
+                                                        <HBox class="loyality_Margin" width="auto">
+                                                            <Title text="{i18n>commom_LoyaltyId}" class="sapUiLargeMarginEnd" level="H4"/>
+                                                            <ObjectStatus id="loyaltyId" text="{oGlobalModel>/LoyaltyIDMasked}" state="Information" class="sapUiSmallMarginEnd" press="onPressCheckCard"/>
+                                                            <Title text="| {i18n>commom_LoyaltyPoints}" class="sapUiTinyMarginBegin sapUiLargeMarginEnd" />
+                                                            <ObjectStatus id="loyaltyPoints" text="{oGlobalModel>/LoyaltyBal}" state="Information" class="sapUiSmallMarginEnd"/>
+                                                        </HBox>
+                                                    </VBox>
+                                                    <form:Form editable="true" class="Cl_SearchCusFormLabel">
+                                                        <form:layout>
+                                                            <form:ResponsiveGridLayout labelSpanXL="3" labelSpanL="3" labelSpanM="3" labelSpanS="12" adjustLabelSpan="false" emptySpanXL="4" emptySpanL="4" emptySpanM="4" emptySpanS="0" columnsXL="1" columnsL="1" columnsM="1" singleContainerFullSize="false" />
+                                                        </form:layout>
+                                                        <form:formContainers>
+                                                            <form:FormContainer>
+                                                                <form:formElements>
+                                                                    <form:FormElement label="{i18n>paymentIntegration_AED}">
+                                                                        <form:fields>
+                                                                            <Input value="{ServicesViewModel>/Loyaltyamount}" type="Tel" placeholder="{i18n>paymentIntegration_Amount}" valueState="Information" liveChange="onlivechangeamount" class="Cl_CCInput">
+                                                                                <layoutData>
+                                                                                    <l:GridData span="XL2 L2 M4 S4" />
+                                                                                </layoutData>
+                                                                            </Input>
+                                                                        </form:fields>
+                                                                    </form:FormElement>
+                                                                </form:formElements>
+                                                            </form:FormContainer>
+                                                        </form:formContainers>
+                                                    </form:Form>
+                                                </content>
+                                            </Panel>
+
+                                            <!-- Coupon MOP -->
+                                            <Panel visible="false" expandable="true" expand="onExpandCoupon" width="auto" class="sapUiTinyMarginBeginEnd" expandAnimation="true" expanded="{ServicesViewModel>/CouponMOPPanelExpand}">
+                                                <headerToolbar>
+                                                    <OverflowToolbar height="3rem">
+                                                        <!-- <CheckBox text="" valueState="Information" enabled="true" selected="{ServicesViewModel>/Coupon_CheckBoxSeleted}" select="onPressCouponselect" class="Cl_CheckBox" /> -->
+                                                        <Button icon="sap-icon://money-bills" />
+                                                        <Title text="{i18n>paymentIntegration_MOPCoupon}" class="panel_font"/>
+
+                                                    </OverflowToolbar>
+                                                </headerToolbar>
+                                                <content>
+                                                    <form:Form editable="true" class="Cl_SearchCusFormLabel">
+                                                        <form:layout>
+                                                            <form:ResponsiveGridLayout labelSpanXL="3" labelSpanL="3" labelSpanM="3" labelSpanS="12" adjustLabelSpan="false" emptySpanXL="4" emptySpanL="4" emptySpanM="4" emptySpanS="0" columnsXL="1" columnsL="1" columnsM="1" singleContainerFullSize="false" />
+                                                        </form:layout>
+                                                        <form:formContainers>
+                                                            <form:FormContainer>
+                                                                <form:formElements>
+                                                                    <form:FormElement>
+                                                                        <form:fields>
+                                                                            <Input value="{ServicesViewModel>/CouponAmount}" type="Tel" placeholder="{i18n>paymentIntegration_Amount}" valueState="Information" liveChange="onlivechangeamount" class="Cl_CCInput">
+                                                                                <layoutData>
+                                                                                    <l:GridData span="XL1 L2 M2 S4" />
+                                                                                </layoutData>
+                                                                            </Input>
+                                                                            <Input value="{ServicesViewModel>/CouponNumber}" placeholder="{i18n>paymentIntegration_CouponNo}" valueState="Information" class="Cl_CCInput">
+                                                                                <layoutData>
+                                                                                    <l:GridData span="XL1 L2 M2 S4" />
+                                                                                </layoutData>
+                                                                            </Input>
+                                                                            <Button text="{i18n>paymentIntegration_Check}" type="Transparent" press="onPressPayCard">
+                                                                                <layoutData>
+                                                                                    <l:GridData span="XL1 L2 M2 S4" />
+                                                                                </layoutData>
+                                                                            </Button>
+                                                                        </form:fields>
+                                                                    </form:FormElement>
+                                                                </form:formElements>
+                                                            </form:FormContainer>
+                                                        </form:formContainers>
+                                                    </form:Form>
+                                                </content>
+                                            </Panel>
+
+                                            <!-- Wallet MOP Emirates -->
+
+                                            <!-- expand="onExpandWallet" -->
+                                            <Panel visible="{ServicesViewModel>/MOPVisible}" expandable="true" expand="onExpandWalletNew" width="auto" class="sapUiTinyMarginBeginEnd" expandAnimation="true" expanded="{ServicesViewModel>/WalletMOPPanelExpand}">
+                                                <headerToolbar>
+                                                    <OverflowToolbar height="3rem">
+                                                        <!-- <CheckBox text="" valueState="Information" enabled="true" selected="{ServicesViewModel>/Wallet_CheckBoxSeleted}" select="onPressWalletANPR" class="Cl_CheckBox" /> -->
+                                                        <Button icon="sap-icon://wallet" />
+                                                        <Title text="{i18n>paymentIntegration_MOPWallet}" class="panel_font"/>
+                                                        <ToolbarSpacer />
+                                                    </OverflowToolbar>
+                                                </headerToolbar>
+                                                <content>
+                                                    <VBox>
+
+                                                        <HBox class="loyality_Margin" width="auto">
+                                                            <ObjectStatus title="{i18n>paymentIntegration_MOPWallet}" text="{oGlobalModel>/WalletNumberMask}" state="Information" class="Cl_Loyalty" active="true" press="onpressScanADNOCPlus"/>
+                                                            <ObjectStatus title="{i18n>ADNOCplusBalance}" text="{oGlobalModel>/P24Balance}" state="Information" class="Cl_Loyalty sapUiSmallMarginBegin"/>
+                                                        </HBox>
+
+                                                        <HBox class="sapUiTinyMarginTop">
+                                                            <ObjectStatus title="{i18n>ADNOCPlusCustName}" text="{oGlobalModel>/P24Customer}" state="Information" class="Cl_Loyalty sapUiTinyMarginBegin" active="true" press="onpressScanADNOCPlus" />
+                                                        </HBox>
+                                                    </VBox>
+
+                                                    <form:Form editable="true" class="Cl_SearchCusFormLabel">
+                                                        <form:layout>
+                                                            <form:ResponsiveGridLayout labelSpanXL="3" labelSpanL="3" labelSpanM="3" labelSpanS="12" adjustLabelSpan="false" emptySpanXL="4" emptySpanL="4" emptySpanM="4" emptySpanS="0" columnsXL="1" columnsL="1" columnsM="1" singleContainerFullSize="false" />
+                                                        </form:layout>
+                                                        <form:formContainers>
+                                                            <form:FormContainer>
+                                                                <form:formElements>
+                                                                    <form:FormElement label="{i18n>paymentIntegration_AED}">
+                                                                        <form:fields>
+                                                                            <HBox>
+                                                                                <Input value="{ServicesViewModel>/WalletAmount}" type="Tel" placeholder="{i18n>paymentIntegration_Amount}" valueState="Information" liveChange="onlivechangeamount" class="Cl_CCInput">
+                                                                                    <layoutData>
+                                                                                        <l:GridData span="XL1 L2 M2 S4" />
+                                                                                    </layoutData>
+                                                                                </Input>
+                                                                                <Button text="{i18n>common_WalletPayTap}" press="onpressScanADNOCPlus" type="Emphasized" class="cl_Emphasizebtn sapUiTinyMarginBegin" />
+                                                                                <ToolbarSpacer />
+                                                                                <Button press="onResetWallet" icon="sap-icon://reset" class="cl_Emphasizebtn sapUiTinyMarginBegin" type="Emphasized"/>
+                                                                            </HBox>
+                                                                        </form:fields>
+                                                                    </form:FormElement>
+                                                                </form:formElements>
+                                                            </form:FormContainer>
+                                                        </form:formContainers>
+                                                    </form:Form>
+                                                </content>
+                                            </Panel>
+
+                                            <!-- Wallet MOP ADNOC Plus-->
+
+                                            <!-- expand="onExpandWallet" -->
+                                            <Panel visible="false" expandable="true" expand="true" width="auto" class="sapUiTinyMarginBeginEnd" expandAnimation="true" expanded="{ServicesViewModel>/WalletMOPPanelExpandADNOC}">
+                                                <headerToolbar>
+                                                    <OverflowToolbar height="3rem">
+                                                        <!-- <CheckBox valueState="Information" enabled="true" selected="{ServicesViewModel>/Wallet_CheckBoxSeleted}" select="onPressWalletADNOCPlus" class="Cl_CheckBox" /> -->
+                                                        <Button icon="sap-icon://wallet" />
+                                                        <Title text="{i18n>paymentIntegration_MOPWallet_ADNOC}" class="panel_font"/>
+                                                    </OverflowToolbar>
+                                                </headerToolbar>
+                                                <content>
+                                                    <VBox>
+
+                                                        <HBox class="loyality_Margin" width="auto">
+                                                            <ObjectStatus title="{i18n>paymentIntegration_MOPWallet}" text="{oGlobalModel>/WalletNumberMask}" state="Information" class="Cl_Loyalty" active="true" press="onpressScanADNOCPlus"/>
+                                                            <ObjectStatus title="{i18n>ADNOCplusBalance}" text="{oGlobalModel>/P24Balance}" state="Information" class="Cl_Loyalty sapUiSmallMarginBegin"/>
+                                                        </HBox>
+
+                                                        <HBox class="sapUiTinyMarginTop">
+                                                            <ObjectStatus title="{i18n>ADNOCPlusCustName}" text="{oGlobalModel>/P24Customer}" state="Information" class="Cl_Loyalty sapUiTinyMarginBegin" active="true" press="onpressScanADNOCPlus" />
+                                                        </HBox>
+                                                    </VBox>
+                                                    <!-- <HBox class="sapUiTinyMarginTop">
+                                                        <ObjectStatus title="{i18n>paymentIntegration_MOPWallet}" text="{oGlobalModel>/WalletNumberMask}" state="Information" class="Cl_Loyalty" active="true" press="onpressScanADNOCPlus" />
+                                                        <ObjectStatus title="{i18n>ADNOCplusBalance}" text="{oGlobalModel>/P24Balance}" state="Information" class="Cl_Loyalty sapUiSmallMarginBegin" />
+                                                    </HBox>
+                                                    <HBox class="sapUiTinyMarginTop">
+                                                        <ObjectStatus title="{i18n>ADNOCPlusCustName}" text="{oGlobalModel>/P24Customer}" state="Information" class="Cl_Loyalty" active="true" press="onpressScanADNOCPlus" />
+                                                        <Button press="onResetWallet" icon="sap-icon://reset" class="sapUiTinyMarginBeginEnd" />
+                                                    </HBox> -->
+                                                    <form:Form editable="true" class="Cl_SearchCusFormLabel">
+                                                        <form:layout>
+                                                            <form:ResponsiveGridLayout labelSpanXL="3" labelSpanL="3" labelSpanM="3" labelSpanS="12" adjustLabelSpan="false" emptySpanXL="4" emptySpanL="4" emptySpanM="4" emptySpanS="0" columnsXL="1" columnsL="1" columnsM="1" singleContainerFullSize="false" />
+                                                        </form:layout>
+                                                        <form:formContainers>
+                                                            <form:FormContainer>
+                                                                <form:formElements>
+                                                                    <form:FormElement label="{i18n>paymentIntegration_AED}">
+                                                                        <form:fields>
+                                                                            <HBox>
+                                                                                <Input value="{ServicesViewModel>/WalletAmount}" type="Tel" placeholder="{i18n>paymentIntegration_Amount}" valueState="Information" liveChange="onlivechangeamount" class="Cl_CCInput">
+                                                                                    <layoutData>
+                                                                                        <l:GridData span="XL1 L2 M2 S4" />
+                                                                                    </layoutData>
+                                                                                </Input>
+                                                                                <Button text="{i18n>common_WalletPayTap}" press="onpressScanADNOCPlus" type="Emphasized" class="cl_Emphasizebtn sapUiTinyMarginBegin" />
+                                                                                <ToolbarSpacer />
+                                                                                <Button press="onResetWallet" icon="sap-icon://reset" class="cl_Emphasizebtn sapUiTinyMarginBegin" type="Emphasized"/>
+                                                                            </HBox>
+                                                                        </form:fields>
+                                                                    </form:FormElement>
+                                                                    <!-- <form:FormElement>
+                                                                        <form:fields>
+                                                                            <HBox>
+                                                                                <Input value="{ServicesViewModel>/WalletAmount}" type="Tel" placeholder="{i18n>paymentIntegration_Amount}" valueState="Information" liveChange="onlivechangeamount" class="Cl_CCInput">
+                                                                                    <layoutData>
+                                                                                        <l:GridData span="XL1 L2 M2 S4" />
+                                                                                    </layoutData>
+                                                                                </Input>
+                                                                                <Button text="{i18n>common_WalletPayTap}" press="onpressScanADNOCPlus" type="Emphasized" class="cl_Emphasizebtn sapUiTinyMarginBegin" />
+                                                                            </HBox>
+                                                                        </form:fields>
+                                                                    </form:FormElement> -->
+                                                                </form:formElements>
+                                                            </form:FormContainer>
+                                                        </form:formContainers>
+                                                    </form:Form>
+                                                </content>
+                                            </Panel>
+
+                                            <!-- PAYMENT LINK PANEL -->
+                                            <Panel visible="{SalesOrderCardDataModel>/MOPVisible}" expandable="true" expand="onExpandPaymentLink" expanded="{SalesOrderCardDataModel>/PaymentLinkMOPPanelExpand}" width="auto" class="sapUiTinyMarginBeginEnd Cl_Panel" expandAnimation="true">
+                                                <headerToolbar>
+                                                    <OverflowToolbar height="3rem">
+                                                        <Image src="{imageModel>/path}/image/paymentlink.svg"/>
+                                                        <Title text="{i18n>paymentIntegration_MOPPaymentLink}" class="panel_font"/>
+
+                                                    </OverflowToolbar>
+                                                </headerToolbar>
+                                                <content>
+                                                    <form:Form editable="true" class="Cl_SearchCusFormLabel">
+                                                        <form:layout>
+                                                            <form:ResponsiveGridLayout labelSpanXL="3" labelSpanL="3" labelSpanM="3" labelSpanS="12" adjustLabelSpan="false" emptySpanXL="4" emptySpanL="4" emptySpanM="4" emptySpanS="0" columnsXL="1" columnsL="1" columnsM="1" singleContainerFullSize="false" />
+                                                        </form:layout>
+                                                        <form:formContainers>
+                                                            <form:FormContainer>
+                                                                <form:formElements>
+                                                                    <form:FormElement label="Mobile Number">
+                                                                        <form:fields>
+                                                                            <Input value="" type="Tel" placeholder="{i18n>paymentIntegration_Mobile}" valueState="Information" liveChange="onLiveMaskSSN" valueLiveUpdate="true" change="" valueStateText="Payment Link" class="Cl_CCInput">
+                                                                                <layoutData>
+                                                                                    <l:GridData span="XL2 L2 M4 S4" />
+                                                                                </layoutData>
+                                                                            </Input>
+                                                                        </form:fields>
+                                                                    </form:FormElement>
+                                                                </form:formElements>
+                                                            </form:FormContainer>
+                                                        </form:formContainers>
+                                                    </form:Form>
+                                                </content>
+                                            </Panel>
+                                        </ScrollContainer>
+                                    </FlexBox>
+                                </l:BlockLayoutCell>
+                                <l:BlockLayoutCell width="1">
+                                    <VBox>
+                                        <Title text="{i18n>paymentIntegration_OrderSummery}" level="H3" class="header_title"/>
+                                    </VBox>
+                                    <FlexBox direction="Column" class="sapUiDemoFlexBoxSizeAdjustmentsZeroWidthItems" renderType="Div" alignItems="Stretch" justifyContent="Start">
+                                        <!-- Row: Subtotal -->
+                                        <HBox justifyContent="SpaceBetween" width="100%">
+                                            <Text text="{i18n>paymentIntegration_OrderNo}" class="label_font"/>
+                                            <Text text="{GetSalesOrderResponse>/serviceRequestNo}" class="label_amount_font"/>
+                                        </HBox>
+
+                                        <HBox justifyContent="SpaceBetween" width="100%">
+                                            <Text text="{i18n>paymentIntegration_UTRNNo}" class="label_font"/>
+                                            <Text text="{GetSalesOrderResponse>/orderUTRRefNo}" class="label_amount_font label_max_width"/>
+                                        </HBox>
+
+                                        <!-- Row: Subtotal after discount -->
+                                        <HBox justifyContent="SpaceBetween" width="100%">
+                                            <Text text="{i18n>paymentIntegration_Subtotal}" class="label_font"/>
+                                            <HBox alignItems="Center" justifyContent="End">
+                                                <Image height="0.7rem" src="{imageModel>/path}/image/Dirham.png" class="sapUiTinyMarginRight Cl_DirahamIcon" />
+                                                <Text text="{SalesOrderCardDataModel>/SubTotal}" class="label_amount_font"/>
+                                            </HBox>
+                                        </HBox>
+
+                                        <HBox justifyContent="SpaceBetween" width="100%">
+                                            <Text text="{i18n>paymentIntegration_PromotionalDis}" class="label_font"/>
+                                            <HBox alignItems="Center" justifyContent="End">
+                                                <Image height="0.7rem" src="{imageModel>/path}/image/Dirham.png" class="sapUiTinyMarginRight Cl_DirahamIcon" />
+                                                <Text text="{SalesOrderCardDataModel>/DiscountAmount}" class="label_amount_font"/>
+                                            </HBox>
+                                        </HBox>
+
+                                        <HBox justifyContent="SpaceBetween" width="100%">
+                                            <Text text="{i18n>paymentIntegration_Subtotal_dis}" class="label_font"/>
+                                            <HBox alignItems="Center" justifyContent="End">
+                                                <Image height="0.7rem" src="{imageModel>/path}/image/Dirham.png" class="sapUiTinyMarginRight Cl_DirahamIcon" />
+                                                <Text text="{SalesOrderCardDataModel>/SubTotalAfterDis}" class="label_amount_font"/>
+                                            </HBox>
+                                        </HBox>
+
+                                        <!-- VAT Box -->
+                                        <HBox class="vatBox sapUiTinyMarginTop" justifyContent="SpaceBetween" width="100%">
+                                            <Text text="{i18n>paymentIntegration_Taxamount}" class="label_font"/>
+                                            <HBox alignItems="Center" justifyContent="End">
+                                                <Image height="0.7rem" src="{imageModel>/path}/image/Dirham.png" class="sapUiTinyMarginRight Cl_DirahamIcon" />
+                                                <Text text="{SalesOrderCardDataModel>/VatAmount}" class="label_amount_font"/>
+                                            </HBox>
+                                        </HBox>
+
+                                        <!-- Grand Total -->
+                                        <HBox justifyContent="SpaceBetween" width="100%" class="totalBox sapUiSmallMarginTop">
+                                            <Text text="{i18n>paymentIntegration_GrandTotal}" class="grandTotalText" />
+                                            <HBox alignItems="Center" justifyContent="End">
+                                                <Image height="0.9rem" src="{imageModel>/path}/image/AEDCurrencyBlue.svg" class="sapUiTinyMarginRight Cl_DirahamIcon" />
+                                                <Text text="{SalesOrderCardDataModel>/SubTotalAfterDis}" class="grandTotalAmount"/>
+                                            </HBox>
+                                        </HBox>
+
+                                        <!-- Action Buttons -->
+                                        <HBox justifyContent="Center" width="100%" class="sapUiSmallMarginTop footer-button-row">
+                                            <Button text="{i18n>paymentIntegration_Pay}" width="100%" type="Emphasized" class="cl_Emphasizebtn sapUiSmallMarginEnd" press="onPresspayment" visible="{ServicesViewModel>/PaymentButtomVisible}">
+                                                <layoutData>
+                                                    <FlexItemData growFactor="1" />
+                                                </layoutData>
+                                            </Button>
+
+                                            <Button text="{i18n>paymentIntegration_Cancel}" width="100%" type="Transparent" class="sapUiTinyMarginBegin cl_Transparentbtn" press="onBtnPressCancel">
+                                                <layoutData>
+                                                    <FlexItemData growFactor="1" />
+                                                </layoutData>
+                                            </Button>
+                                        </HBox>
+                                    </FlexBox>
+                                </l:BlockLayoutCell>
+                            </l:BlockLayoutRow>
+                        </l:BlockLayout>
+                    </l:VerticalLayout>
+                </IconTabFilter>
+
+                <IconTabFilter text="{i18n>paymentIntegration_represenvative}" key="Representative" icon="sap-icon://customer-and-contacts" visible="{= ${oGlobalModel>/isServicePage} }">
+                    <VBox class="sapUiSmallMarginBegin sapUiSmallMarginEnd">
+
+                        <!-- SimpleForm for other inputs -->
+                        <f:SimpleForm id="simpleFormRespo" title="Representative Details" editable="true" layout="ColumnLayout" labelSpanXL="2" labelSpanL="2" labelSpanM="3" labelSpanS="12" adjustLabelSpan="false" emptySpanXL="1" emptySpanL="1" emptySpanM="0" emptySpanS="0" columnsXL="4" columnsL="4" columnsM="2" singleContainerFullSize="false"
+                            xmlns:f="sap.ui.layout.form"
+                            xmlns="sap.m"
+                            xmlns:core="sap.ui.core" class="sapUiSmallMarginTop">
+
+                            <Label text="{i18n>repres_CommType}"/>
+                            <RadioButton id="respRadioEmail" text="{i18n>repres_Email}" groupName="commType" selected="{SalesOrderCardDataModel>/CustomerInfo/commTypeMail}" select="{oGlobalModel>/CustomerInfo/commTypeMail}" editable="false">
+                                <customData>
+                                    <core:CustomData key="dataKey" value="commTypeMail" />
+                                </customData>
+                            </RadioButton>
+
+                            <RadioButton id="respRadioSMS" text="{i18n>repres_SMS}" groupName="commType" selected="{SalesOrderCardDataModel>/CustomerInfo/commTypeSMS}" select="{oGlobalModel>/CustomerInfo/commTypeSMS}" editable="false">
+                                <customData>
+                                    <core:CustomData key="dataKey" value="commTypeSMS" />
+                                </customData>
+                            </RadioButton>
+
+                            <RadioButton id="respRadioWhtApp" text="{i18n>repres_WhatsApp}" groupName="commType" selected="{SalesOrderCardDataModel>/CustomerInfo/commTypeWhatsapp}" select="{oGlobalModel>/CustomerInfo/commTypeWhatsapp}" editable="false">
+                                <customData>
+                                    <core:CustomData key="dataKey" value="commTypeWhatsapp" />
+                                </customData>
+                            </RadioButton>
+
+                            <Label text="{i18n>repres_ExpiryFrom}" />
+                            <DatePicker id="respFromDate" required="true" value = "{SalesOrderCardDataModel>/CustomerInfo/emiratesFromDate}" editable="false" change="onExpiryDateChange" displayFormat="dd-MM-yyyy" valueFormat="yyyy-MM-dd"/>
+
+                            <Label text="{i18n>repres_IDType}" />
+                            <Select id="respIDType" items="{IdTypesModel>/idTypes}" selectedKey="{SalesOrderCardDataModel>/CustomerInfo/idType}" required="true" change="onSelectIDType" editable="false">
+                                <core:Item key="{IdTypesModel>key}" text="{IdTypesModel>text}" />
+                            </Select>
+
+                            <Label text="{i18n>repres_ExpiryTo}" />
+                            <DatePicker id="respToDate" required="true" value = "{SalesOrderCardDataModel>/CustomerInfo/emiratesToDate}" editable="false" change="onExpiryDateChange" displayFormat="dd-MM-yyyy" valueFormat="yyyy-MM-dd"/>
+
+                            <Label text="{i18n>repres_ID}" />
+                            <MaskInput placeholder="{i18n>customer_EnterId}" id="respID" mask="CCC-CCCC-CCCC-CCC-C" showClearIcon="{/showClearIcon}" value="{SalesOrderCardDataModel>/CustomerInfo/emiratesId}" required="true" editable="false">
+                                <rules>
+                                    <MaskInputRule maskFormatSymbol="A" regex="[A-Za-z]" />
+                                    <MaskInputRule maskFormatSymbol="N" regex="[0-9]" />
+                                    <MaskInputRule maskFormatSymbol="C" regex="[A-Za-z0-9]" />
+                                </rules>
+                            </MaskInput>
+
+                            <Label text="{i18n>repres_Mobile}" labelFor="mobileNo" />
+                            <Input id="respMobile" required="true" value="{SalesOrderCardDataModel>/CustomerInfo/mobileNo}" editable="false" maxLength="12" />
+
+                            <Label text="{i18n>repres_Name}" />
+                            <Input id="respName" required="true" value="{SalesOrderCardDataModel>/CustomerInfo/firstName} {SalesOrderCardDataModel>/CustomerInfo/lastName}" editable="false" maxLength="100" />
+
+                            <Label text="{i18n>repres_Email}" />
+                            <Input id="respEmail" required="true" value="{SalesOrderCardDataModel>/CustomerInfo/emailAddress}" editable="false" maxLength="50" />
+                        </f:SimpleForm>
+                        <HBox justifyContent="End" class="sapUiSmallMarginTop">
+                            <Button id="emiratesBtn" text="{i18n>repres_Emirates}" type="Transparent" press="onpressreadEmiratesIDRespo" visible="false" class="cl_Transparentbtn" icon="{imageModel>/path}/image/payment.png"/>
+                            <Button id="resCameraBtn" text="{i18n>repres_Upload}" class="cl_Emphasizebtn sapUiTinyMarginBegin" icon="sap-icon://camera" visible="false" press="onCaptureImageForRespo" type="Emphasized">
+                                <customData>
+                                    <BadgeCustomData key="badge" value="{= ${FileUploadedModel>/FileCategory/Files/base64File} ? 1 : 0 }" visible="true"/>
+                                </customData>
+                            </Button>
+                            <Button id="resViewBtn" text="{i18n>repres_View}" icon="sap-icon://show" visible="false" press="onViewFileRepres" type="Emphasized" class="cl_Emphasizebtn sapUiTinyMarginBegin"/>
+                            <Button id="edit" text="{i18n>repres_Edit}" press="onBtnPressEditRespo" type="Emphasized" class="cl_Emphasizebtn sapUiTinyMarginBegin" icon="sap-icon://user-edit"/>
+                            <Button id="save" text="{i18n>repres_Save}" visible="false" press="onBtnPressSaveRespo" type="Emphasized" class="cl_Emphasizebtn sapUiTinyMarginBegin" icon="sap-icon://save"/>
+                            <Button id="cancel" text="{i18n>repres_Undo}" visible="false" press="onBtnPressCancelRespo" type="Emphasized" class="cl_Emphasizebtn sapUiTinyMarginBegin" icon="sap-icon://undo"/>
+                        </HBox>
+                    </VBox>
+
+                </IconTabFilter>
+            </items>
+        </IconTabBar>
+
+        <footer>
+            <OverflowToolbar enabled="true" visible="false">
+                <ToolbarSpacer />
+                <Button text="{i18n>paymentIntegration_ButtonPayment}" type="Emphasized" iconFirst="true" width="auto" visible="true" iconDensityAware="false" press="" class="sapUiTinyMarginEnd" />
+            </OverflowToolbar>
+        </footer>
+    </Page>
+
+
+</mvc:View>

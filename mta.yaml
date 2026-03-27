@@ -1,0 +1,91 @@
+_schema-version: 3.3.0
+ID: EYDemo
+description: A simple CAP project.
+version: 1.0.0
+modules:
+- name: EYDemo-srv
+  type: nodejs
+  path: gen/srv
+  requires:
+  - name: EYDemo-db
+  provides:
+  - name: srv-api
+    properties:
+      srv-url: ${default-url}
+  parameters:
+    buildpack: nodejs_buildpack
+    instances: 1
+  build-parameters:
+    builder: npm-ci
+- name: EYDemo-db-deployer
+  type: hdb
+  path: gen/db
+  requires:
+  - name: EYDemo-db
+  parameters:
+    buildpack: nodejs_buildpack
+- name: EYDemo-app-deployer
+  type: com.sap.application.content
+  path: gen
+  requires:
+  - name: srv-api
+  - name: EYDemo-html5-repo-host
+    parameters:
+      config:
+        HTML5Runtime_enabled: true
+      content-target: true
+  build-parameters:
+    build-result: app/
+    requires:
+    - artifacts:
+      - project1.zip
+      name: project1
+      target-path: app/
+- name: project1
+  type: html5
+  path: project1
+  build-parameters:
+    build-result: dist
+    builder: custom
+    commands:
+    - npm install
+    - npm run build:cf
+    supported-platforms: []
+resources:
+- name: EYDemo-db
+  type: com.sap.xs.hdi-container
+  parameters:
+    service: hana
+    service-plan: hdi-shared
+- name: EYDemo-html5-repo-host
+  type: org.cloudfoundry.managed-service
+  parameters:
+    service: html5-apps-repo
+    service-plan: app-host
+- name: EYDemo-destination-service
+  type: org.cloudfoundry.managed-service
+  parameters:
+    config:
+      HTML5Runtime_enabled: false
+      init_data:
+        instance:
+          destinations:
+          - Authentication: NoAuthentication
+            Name: ui5
+            ProxyType: Internet
+            Type: HTTP
+            URL: https://ui5.sap.com
+          existing_destinations_policy: update
+      version: 1.0.0
+    service: destination
+    service-name: EYDemo-destination-service
+    service-plan: lite
+parameters:
+  deploy_mode: html5-repo
+  enable-parallel-deployments: true
+build-parameters:
+  before-all:
+  - builder: custom
+    commands:
+    - npm ci
+    - npx cds build --production

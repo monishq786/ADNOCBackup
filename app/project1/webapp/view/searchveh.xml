@@ -1,0 +1,469 @@
+<mvc:View controllerName="adnoc.vi.vehicleinspection.modone.controller.SearchVehicle"
+    xmlns:html="http://www.w3.org/1999/xhtml"
+    xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
+    xmlns="sap.m"
+    xmlns:l="sap.ui.layout"
+    xmlns:f="sap.ui.layout.form"
+    xmlns:core="sap.ui.core"
+    xmlns:grid="sap.ui.layout.cssgrid"
+    xmlns:ff="sap.f"
+    xmlns:care="sap.ui.core"
+    xmlns:card="sap.f.cards">
+    <Page id="searchVehicleid" showHeader="false" class="" title="{i18n>searchVehicle_Title}" >
+        <content>
+            <l:VerticalLayout width="100%" class="sapUiTinyMargin sapUiSmallMarginTop">
+                <l:BlockLayout background="Dashboard">
+                    <l:BlockLayoutRow accentCells="Accent1">
+                        <l:BlockLayoutCell width="4">
+                        <!-- Header Section (Business Data and sift detail)-->
+                            <HBox justifyContent="SpaceBetween" alignItems="Center" class="sapUiTinyMargin">
+                                <Title text="{i18n>searchVehicle}"/>
+                                <HBox justifyContent="SpaceBetween" alignItems="Center">
+                                    <Title text="{i18n>searchVehicle_MainSite}" class="sapUiTinyMarginEnd" />
+                                    <ObjectStatus id="userRoleID" text="{oRoleModel>/EmpRoleName}" state="Information" class="sapUiTinyMarginEnd" />
+                                    <Title text="| {i18n>searchVehicle_BusinessDate}" class="sapUiTinyMarginEnd" />
+                                    <ObjectStatus id="dateid" text="{oModelbusiness>/BusinessDate}" state="Information" class="sapUiTinyMarginEnd" />
+                                    <Title text="| {i18n>searchVehicle_Shift}" class="sapUiTinyMarginBegin sapUiTinyMarginEnd" />
+                                    <ObjectStatus id="1" text="{oModelbusiness>/empShift/description}" state="Information" />
+                                </HBox>
+                            </HBox>
+                            <FlexBox alignItems="Center" justifyContent="Start">
+                            <!-- Filter Section  -->
+                                <VBox class="sapUiTinyMarginBegin">
+                                    <HBox class="sapUiTinyMarginRight">
+                                        <VBox class="sapUiSmallMarginEnd" width="7rem">
+                                            <Label text="{i18n>common_PlateNumber}" required="true" />
+                                            <Input id="plateNoId" change="onInputChange" value="{VIRGlobalModel>/PlateNo}" placeholder="{i18n>PlateNumber}" maxLength="5" class=" sapUiTinyMarginEnd sapUiTinyMarginBottom" />
+                                        </VBox>
+
+                                        <VBox class="sapUiSmallMarginEnd">
+                                            <Label text="{i18n>common_PlateColor}" required="true" />
+                                            <Input id="plateColorid" value="{EntryFormDataSourceModel>/bodyColorEnglish}" change="onInputChange" placeholder="{i18n>PlateColor}" maxLength="10" class="sapUiTinyMarginEnd  sapUiTinyMarginBottom" showValueHelp="true" valueHelpRequest="cflForPlateColor" showSuggestion="true" showTableSuggestionValueHelp="false" suggestionRows="{BodyColorMastersModel>/items}" suggestionItemSelected="onSelectedcfl" enableTableAutoPopinMode="true" liveChange="filterPlateColor">
+                                                <suggestionColumns>
+                                                    <Column>
+                                                        <Label text="{i18n>searchVehicle_Plate-Color-English}" />
+                                                    </Column>
+                                                    <Column hAlign="Center">
+                                                        <Label text="{i18n>searchVehicle_PlateColor-Arabic}" />
+                                                    </Column>
+                                                </suggestionColumns>
+
+                                                <suggestionRows>
+                                                    <ColumnListItem>
+                                                        <Label text="{BodyColorMastersModel>codeDescEnglish}" />
+                                                        <Label text="{BodyColorMastersModel>codeDescArabic}" />
+
+                                                    </ColumnListItem>
+                                                </suggestionRows>
+                                            </Input>
+                                        </VBox>
+                                        <VBox class="sapUiSmallMarginEnd">
+                                            <Label text="{i18n>common_PlateSource}" required="true" />
+                                            <Input id="plateSourceId" change="onInputChange" value="{EntryFormDataSourceModel>/CodeDescEnglish}" placeholder="{i18n>PlateSource}" maxLength="10" class="sapUiTinyMarginEnd  sapUiTinyMarginBottom" showValueHelp="true" valueHelpRequest="cflForPlateSource" showSuggestion="true" showTableSuggestionValueHelp="false" suggestionRows="{PlateSourecMastersModel>/items}" suggestionItemSelected="onSelectedcfl" liveChange="filterPlateSurce">
+                                                <suggestionColumns>
+                                                    <Column>
+                                                        <Label text="{i18n>searchVehicle_PlateSource-English}" />
+                                                    </Column>
+                                                    <Column hAlign="Center">
+                                                        <Label text="{i18n>searchVehicle_PlateSource-Arabic}" />
+                                                    </Column>
+                                                </suggestionColumns>
+
+                                                <suggestionRows>
+                                                    <ColumnListItem>
+                                                        <Label text="{PlateSourecMastersModel>codeDescEnglish}" />
+                                                        <Label text="{PlateSourecMastersModel>codeDescArabic}" />
+
+                                                    </ColumnListItem>
+                                                </suggestionRows>
+                                            </Input>
+                                        </VBox>
+                                        <VBox class="sapUiSmallMarginEnd">
+                                            <Label text="{i18n>common_PlateKind}" required="true" />
+                                            <Input id="plateKindid" value="{EntryFormDataSourceModel>/codeDescEnglish}" change="onInputChange" placeholder="{i18n>PlateKind}" maxLength="5" class=" sapUiTinyMarginEnd  sapUiTinyMarginBottom" showValueHelp="true" valueHelpRequest="cflForPLateKind" showSuggestion="true" showTableSuggestionValueHelp="false" suggestionRows="{PlateKindMastersModel>/items}" suggestionItemSelected="onSelectedcfl" liveChange="filterPlateKind">
+                                                <suggestionColumns>
+                                                    <Column>
+                                                        <Label text="{i18n>searchVehicle_Platekind-English}" />
+                                                    </Column>
+                                                    <Column hAlign="Center">
+                                                        <Label text="{i18n>searchVehicle_Platekind-Arabic}" />
+                                                    </Column>
+                                                </suggestionColumns>
+
+                                                <suggestionRows>
+                                                    <ColumnListItem>
+                                                        <Label text="{PlateKindMastersModel>codeDescEnglish}" />
+                                                        <Label text="{PlateKindMastersModel>codeDescArabic}" />
+
+                                                    </ColumnListItem>
+                                                </suggestionRows>
+                                            </Input>
+                                        </VBox>
+                                        <VBox class="sapUiTinyMarginEnd">
+                                            <Label text="{i18n>common_ChassisNo}" required="false" />
+                                            <HBox>
+                                                <!-- {oGlobalModel>/isAddMoreVehicle} -->
+                                                <Input id="chassisNumberid" value="{VIRGlobalModel>/ChassisNumber}" change="onInputChange" placeholder="{i18n>ChassisNumber}" maxLength="18" class="sapUiTinyMarginEnd  sapUiTinyMarginBottom" />
+                                                <Button width="5rem" type="Emphasized" text="{i18n>searchVehicleBtn_Search}" class="cl_Emphasizebtn sapUiTinyMarginEnd  sapUiTinyMarginBottom sapUiTinyMarginBegin " press="onBtnPressAdmobility" />
+                                                <Button width="5rem" type="Transparent" text="{i18n>searchVehicleBtn_Reset}" class="cl_Transparentbtn sapUiTinyMarginEnd  sapUiTinyMarginBottom" press="onBtnPressReset" />
+                                                <Button width="8.5rem" icon="{imageModel>/path}/image/exit.png" type="Transparent" text="{i18n>searchVehicleBtn_BackToOrder}" class="cl_Transparentbtn sapUiTinyMarginEnd  sapUiTinyMarginBottom" press="onBtnPressBackToOrder" visible="{oGlobalModel>/isAddMoreVehicle}" />
+                                                <Button id="RepestButtonId" width="5rem" type="Emphasized" text="Repeat" class="sapUiTinyMarginEnd  sapUiTinyMarginBottom cl_Emphasizebtn" press="onBtnPressAdmobility">
+                                                    <customData>
+                                                        <core:CustomData key="RepestButtonId" value="RepestButtonValue"/>
+                                                    </customData>
+
+                                                </Button>
+                                            </HBox>
+                                        </VBox>
+
+                                    </HBox>
+                                </VBox>
+                            </FlexBox>
+                        </l:BlockLayoutCell>
+                    </l:BlockLayoutRow>
+                </l:BlockLayout>
+                <l:BlockLayout class="" background="Dashboard">
+                 <!--Show Vehicle details  -->
+                    <l:BlockLayoutRow accentCells="Accent1">
+                        <l:BlockLayoutCell width="4" class="Cl_BlockLayoutRadiusNew">
+                            <VBox class="sapUiTinyMargin">
+                                <FlexBox alignItems="Start" justifyContent="SpaceBetween">
+                                    <Title text="{i18n>searchVehicle_VehicleInfo}" class="Cl_TitleColor sapUiTinyMargin" />
+                                    <Button enabled="false" type="Default" id="CustomersearchId" text="{i18n>searchVehicle_Title}" press="goToCreateVeh" icon="sap-icon://add-employee"/>
+                                </FlexBox>
+                                <VBox visible="{oModelLanding>/formTag}">
+                                    <f:SimpleForm id="header1" editable="true" layout="ColumnLayout" columnsM="3" columnsL="4" columnsXL="4">
+                                        <f:content>
+                                            <Label id="chassLabelId" labelFor="chass" text="{i18n>common_ChassisNo}" />
+                                            <Input id="chassIdInputId" editable="false" value="{DetailVehicleModel>/chasisNumber}" description="" fieldWidth="100%" />
+
+                                            <Label id="EngineNoLableId" labelFor="prodCatType" text="{i18n>common_EngineNo}" />
+                                            <Input id="EngineNoInputId" editable="false" required="true" value="{DetailVehicleModel>/engineNumber}" />
+
+                                            <Label id="EngeenMakeLableId" text="{i18n>common_EngeenMake}" />
+                                            <Input id="EngeenMakeInputId" editable="false" value="{DetailVehicleModel>/manfacturerEnglish}" />
+
+
+                                            <Label id="modelLableId" text="{i18n>common_model}" />
+                                            <Input id="modelInputId" editable="false" value="{DetailVehicleModel>/modelEnglish}" />
+
+                                            <Label id="KindLabelId" text="{i18n>common_Kind}" />
+                                            <Input id="KindInputId" value="{DetailVehicleModel>/plateKindEnglish}" description="" fieldWidth="100%" editable="false"/>
+
+                                            <Label id="typeLableId" labelFor="typeEnglish" text="{i18n>common_Type}" />
+                                            <Input id="typeInputId" editable="false" type="Text" value="{DetailVehicleModel>/typeEnglish}" description="" fieldWidth="100%" />
+
+                                            <Label id="bodyColorLableId" text="{i18n>common_BodyColor}" />
+                                            <Input id="bodyColorInputId" editable="false" value="{DetailVehicleModel>/bodyColorEnglish}" />
+
+
+                                            <Label id="fuelLableId" text="{i18n>common_FuelType}" />
+                                            <Input id="fuelInputId" editable="false" value="{DetailVehicleModel>/fuelTypeEnglish}" />
+
+                                            <Label id="steeringLableId" text="{i18n>common_Steering}" />
+                                            <Input id="steeringInputId" editable="false" value="{DetailVehicleModel>/steeringSideEnglish}" description="" fieldWidth="100%"/>
+
+
+                                            <Label id="regYearLableId" text="{i18n>common_RegYear}" />
+                                            <Input id="regYearInputId" editable="false" value="{DetailVehicleModel>/registrationYear}" />
+
+                                            <Label id="mfgYearLableId" labelFor="cadDeliveryDate" text="{i18n>common_MFGYear}" />
+                                            <Input id="mfgYearLabelId" editable="false" type="Text" value="{DetailVehicleModel>/manufacturingYear}" description="" fieldWidth="100%" />
+
+
+
+                                            <Label id="cylindersLableId" text="{i18n>common_Cylinders}"/>
+                                            <Input id="cylindersInputId" editable="false" value="{DetailVehicleModel>/numberOfCylinders}" />
+
+
+                                            <Label id="expDateLableId" text="{i18n>common_ExpDate}" />
+                                            <Input id="expDatePInputId" editable="false" value="{DetailVehicleModel>/registrationExpiryDate}" />
+
+                                            <Label id="doorLableId" text="{i18n>common_Doors}" />
+                                            <Input id="doorInputId" editable="false" value="{DetailVehicleModel>/numberOfDoors}" />
+
+                                            <Label id="plateTypeLableId" text="{i18n>common_PlateType}" />
+                                            <Input id="plateTypeInputId" editable="false" value="{DetailVehicleModel>/plateTypeCode}" />
+
+                                            <Label id="CustomerTypeLableId" text="{i18n>searchVehicleCustomertype}" />
+                                            <Input id="CustomerTypeInputId" editable="false" value="{DetailVehicleModel>/customertype}" />
+
+
+                                        </f:content>
+                                    </f:SimpleForm>
+                                </VBox>
+                                <VBox visible="{oModelLanding>/LableTag}" justifyContent="Center" alignContent="Center" class="myCenterBox">
+                                    <Label id="msgEmptyId" text="{i18n>searchVehicleMsgForLanding}" class="myCenterBox"/>
+                                </VBox>
+                            </VBox>
+                        </l:BlockLayoutCell>
+                        <l:BlockLayoutCell width= "2" class="Cl_BlockLayoutRadiusNew">
+                            <VBox class="sapUiTinyMargin">
+                                <FlexBox alignItems="Start" justifyContent="SpaceBetween">
+                                    <Title text="{i18n>searchVehicle_CustomerInfo}" class="Cl_TitleColor sapUiTinyMarginTop " />
+                                    <FlexBox>
+                                        <Button id="EditMoreDetail" text="{i18n>searchVehicleEditMoreDetail}" type="Emphasized" press="onPressBtpEditCustomerWithRoute" class="sapUiTinyMarginBottom sapUiTinyMarginEnd" visible="false" />
+                                        <Button id="editId" icon="{imageModel>/path}/image/Edit.png" type="Transparent" tooltip="{i18n>common_btnEdit}" press="onPressBtpEditCustomer" width="1rem" class="sapUiTinyMarginBottom "/>
+                                        <Button id="SaveId" visible="false" type="Emphasized" text="{i18n>common_btnSave}" press="onPressBtnSaveCustomer" width="3rem" class="sapUiTinyMarginBottom" />
+                                    </FlexBox>
+                                </FlexBox>
+                                <VBox>
+                                    <Input id="customerid" placeholder="{i18n>searchVehicleBtn_CustomerName}" value="{CustomerInfoModel>/firstName}{CustomerInfoModel>/lastName}" editable="false" showValueHelp="true" valueHelpIconSrc="sap-icon://arrow-left"/>
+                                </VBox>
+                                <VBox class="sapUiSmallMarginTop">
+                                    <Input id="emailId" placeholder="{i18n>searchVehiclePlsH_EmailId}" value="{CustomerInfoModel>/emailAddress}" editable="false"/>
+                                </VBox>
+                                <VBox class="sapUiSmallMarginTop">
+                                    <Input id="phoneNumberId" placeholder="{i18n>searchVehicleBtn_Phonenumber} " type="Text" valueLiveUpdate="true" liveChange="onLiveChange" value="{CustomerInfoModel>/mobileNo}" editable="false" />
+                                </VBox>
+                                <VBox class="sapUiSmallMarginTop">
+                                    <Select width="20rem" id="customerTypeDrpDwnId" visible="{oModelLanding>/DropDownCusomerType}" forceSelection="false" selectedKey="{CustomerTypeModel>/SelectedCustomerId}" items="{CustomerTypeModel>/CustomerTypeData}">
+                                        <core:Item key="{CustomerTypeModel>CustomerId}" text="{CustomerTypeModel>CustomerType}" />
+                                    </Select>
+                                    <Input visible="{oModelLanding>/InputCusomerType}" id="cusomerTypeId" placeholder="{i18n>searchVehicle_CusomerType}" value="{CustomerInfoModel>/customerType}" editable="false" />
+                                </VBox>
+                            </VBox>
+                            <!-- Show Custome details  -->
+                            <VBox class="sapUiTinyMargin">
+                                <HBox class="sapUiTinyMargin customeGridListHorizontal" justifyContent="Start">
+                                    <ff:GridList visible="true">
+                                        <ff:customLayout>
+                                            <grid:GridBoxLayout boxMinWidth="6rem"/>
+                                        </ff:customLayout>
+                                        <ff:GridListItem id="GridListItemRecaptureId" press="onPressBtnRecapture" type="Active" class="customeListBackGround">
+                                            <VBox height="4rem" justifyContent="Center" alignItems="Center">
+                                                <layoutData>
+                                                    <FlexItemData growFactor="1" shrinkFactor="0" />
+                                                </layoutData>
+                                                <HBox alignItems="Center" justifyContent="SpaceBetween">
+                                                    <Image id="recaptureId" height="1.50rem" src="{imageModel>/path}/image/camera.png" class="sapUiTinyMarginBottom sapUiTinyMarginTop" />
+                                                    <Label text="{i18n>searchVehicle_Re-Capture}" design="Bold" class="sapUiTinyMargin" wrapping="true"/>
+                                                </HBox>
+                                            </VBox>
+                                        </ff:GridListItem>
+                                        <ff:GridListItem press="onPressGridClickRetrieveVehicle" type="Active" class="customeListBackGround">
+                                            <VBox height="4rem" justifyContent="Center" alignItems="Center">
+                                                <layoutData>
+                                                    <FlexItemData growFactor="1" shrinkFactor="0" />
+                                                </layoutData>
+                                                <HBox alignItems="Center" justifyContent="SpaceBetween" class="">
+                                                    <Image height="1.50rem" src="{imageModel>/path}/image/file-search.png" class="sapUiTinyMarginBottom sapUiTinyMarginTop" />
+                                                    <Label text="{i18n>searchVehicle_RetrieveVehicle}" design="Bold" class="sapUiTinyMargin sapUiTinyMarginBegin"  wrapping="true"/>
+                                                </HBox>
+                                            </VBox>
+                                        </ff:GridListItem>
+                                    </ff:GridList>
+                                </HBox>
+                                <VBox class="sapUiTinyMargin">
+                                <!-- Show Recaprure and retrive and other Grid  -->
+                                    <ff:GridList visible="true" width="100%">
+                                        <ff:GridListItem id="ANPRCaptureDataId" class="customeListBackGround" visible="true">
+                                            <VBox height="auto" justifyContent="Center">
+                                                <HBox alignItems="Center" justifyContent="Start">
+                                                    <Image id="captureid" press="onPressGridListShowImage" src="{imageModel>/path}/image/DemoImage-removebg-preview.png" decorative="false" height="2rem" class="sapUiTinyMarginBegin sapUiSmallMarginEnd sapUiTinyMarginTopBottom" />
+                                                    <VBox>
+                                                        <HBox alignItems="Center">
+                                                            <Label text="{i18n>searchVehicle_ANPR}" design="Bold" class="sapUiTinyMarginEnd" />
+                                                            <ObjectStatus id="dateqid" text="{VIRGlobalModel>/ANPRNo}" state="Information" class="sapUiTinyMarginEnd" />
+                                                        </HBox>
+                                                        <HBox alignItems="Center">
+                                                            <Label text="{i18n>searchVehicle_CaptureDate}" design="Bold" class="sapUiTinyMarginEnd" />
+                                                        </HBox>
+                                                        <ObjectStatus id="dateqwid" text="{VIRGlobalModel>/capturedOn}" state="Information" class="sapUiTinyMarginEnd" />
+                                                    </VBox>
+                                                </HBox>
+                                            </VBox>
+                                        </ff:GridListItem>
+                                    </ff:GridList>
+                                </VBox>
+                            </VBox>
+                        </l:BlockLayoutCell>
+                    </l:BlockLayoutRow>
+                </l:BlockLayout>
+                <l:BlockLayout background="Dashboard">
+                    <l:BlockLayoutRow visible="{oModelLanding>/formTag}" accentCells="Accent1">
+                        <l:BlockLayoutCell width= "2rem" class="Cl_BlockLayoutRadiusNew">
+                            <VBox class="sapUiTinyMargin">
+                                <ff:GridListItem id="GridListItemInsideCenterId" type="Inactive" visible="true" class="sapUiTinyMarginBegin sapUiTinyMarginTopBottom customeListBackGround">
+                                    <VBox height="100%" alignItems="Start" justifyContent="Center" class="sapUiMediumMarginBegin">
+                                        <HBox alignItems="Center" justifyContent="Center" class="sapUiTinyMarginTopBottom">
+                                            <Image height="1.4rem" src="{imageModel>/path}/image/InsideCennter.png" class="sapUiSmallMarginEnd" />
+                                            <Text text="{i18n>searchVehicleInsideCenter}" wrapping="false" class="Cl_DashboardLabel sapUiTinyMarginTop" />
+                                        </HBox>
+                                    </VBox>
+                                </ff:GridListItem>
+                                <ff:GridListItem id="GridListItemOutsideCenterId" type="Active" visible="true" class="sapUiTinyMarginBegin sapUiTinyMarginTopBottom customeListBackGround">
+                                    <VBox height="100%" alignItems="Start" justifyContent="Center" class="sapUiMediumMarginBegin">
+                                        <HBox alignItems="Center" justifyContent="Center" class="sapUiTinyMarginTopBottom">
+                                            <Image height="1.6rem" src="{imageModel>/path}/image/OutsideCenter.png" class="sapUiSmallMarginEnd" />
+                                            <Text text="{i18n>searchVehicleOutsideCenter}" wrapping="false" class="Cl_DashboardLabel sapUiTinyMarginTop" />
+                                        </HBox>
+                                    </VBox>
+                                </ff:GridListItem>
+                                <ff:GridListItem id="GridListItemOnlineServiceId" type="Active" visible="true" class="sapUiTinyMarginBegin sapUiTinyMarginTopBottom customeListBackGround">
+                                    <VBox height="100%" alignItems="Start" justifyContent="Center" class="sapUiMediumMarginBegin">
+                                        <HBox alignItems="Center" justifyContent="Center" class="sapUiTinyMarginTopBottom">
+                                            <Image height="1.7rem" src="{imageModel>/path}/image/OnlineService.png" class="sapUiSmallMarginEnd" />
+                                            <Text text="{i18n>searchVehicleOnlineService}" wrapping="false" class="Cl_DashboardLabel sapUiTinyMarginTop" />
+                                        </HBox>
+                                    </VBox>
+                                </ff:GridListItem>
+                            </VBox>
+                        </l:BlockLayoutCell>
+                        <!-- Bottum Section  -->
+                        <l:BlockLayoutCell width= "6rem" class="Cl_BlockLayoutRadiusNew">
+                            <Bar>
+                                <contentLeft>
+                                    <Title text="{i18n>searchVehicle_OnlineService}" class="Cl_TitleColor" />
+                                </contentLeft>
+                            </Bar>
+                            <HBox class="sapUiTinyMarginTop" justifyContent="SpaceBetween">
+                                <VBox class="sapUiMediumMarginTop">
+                                    <VBox>
+                                        <ff:Card press="onBtnPressInspectionType" width="7rem" height="7rem" class="customeListBackGround" id="freshCardId" semanticRole="ListItem">
+                                            <ff:content>
+                                                <VBox width="100%" class="sapUiSmallMargin">
+                                                    <HBox alignItems="Center" justifyContent="Start" class="">
+                                                        <Image src="{imageModel>/path}/image/Re-Test.png" id="imgretestid" width="2rem" height="2rem" />
+                                                    </HBox>
+                                                    <VBox justifyContent="Start" class="sapUiSmallMarginTop">
+                                                        <FlexBox justifyContent="Start">
+                                                            <Text text="{i18n>searchVehicleFreshTest}" wrapping="false" class="Cl_DashboardLabel" />
+                                                        </FlexBox>
+                                                    </VBox>
+                                                </VBox>
+
+                                            </ff:content>
+                                        </ff:Card>
+                                    </VBox>
+
+                                </VBox>
+                                <VBox class="sapUiTinyMarginBegin sapUiMediumMarginTop">
+                                    <VBox >
+                                        <ff:Card press="onBtnPressInspectionType" width="7rem" height="7rem" class="customeListBackGround" id="permitCardid" semanticRole="ListItem">
+                                            <ff:content>
+                                                <VBox width="100%" class="sapUiSmallMargin">
+
+                                                    <HBox alignItems="Center" justifyContent="Start" class="">
+                                                        <Image src="{imageModel>/path}/image/Permit.png" id="imgPermitId" width="2rem" height="2rem" />
+                                                    </HBox>
+                                                    <VBox justifyContent="Start" class="sapUiSmallMarginTop">
+                                                        <FlexBox justifyContent="Start">
+                                                            <Text text="{i18n>searchVehiclePermit}" wrapping="false" class="Cl_DashboardLabel" />
+                                                        </FlexBox>
+                                                    </VBox>
+                                                </VBox>
+                                            </ff:content>
+                                        </ff:Card>
+                                    </VBox>
+
+                                </VBox>
+                                <VBox class="sapUiTinyMarginBegin sapUiMediumMarginTop">
+                                    <VBox >
+                                        <ff:Card press="onBtnPressInspectionType" width="7rem" height="7rem" class="customeListBackGround" id="transfersCardId" semanticRole="ListItem">
+                                            <ff:content>
+                                                <VBox width="100%" class="sapUiSmallMargin">
+                                                    <HBox alignItems="Center" justifyContent="Start" class="">
+                                                        <Image src="{imageModel>/path}/image/Transfers.png" id="imgTransfersId" width="2rem" height="2rem" />
+                                                    </HBox>
+                                                    <VBox justifyContent="Start" class="sapUiSmallMarginTop">
+                                                        <FlexBox justifyContent="Start">
+                                                            <Text text="{i18n>searchVehicleTransfers}" wrapping="false" class="Cl_DashboardLabel" />
+                                                        </FlexBox>
+                                                    </VBox>
+                                                </VBox>
+                                            </ff:content>
+                                        </ff:Card>
+                                    </VBox>
+
+                                </VBox>
+                                <VBox class="sapUiTinyMarginBegin sapUiMediumMarginTop">
+                                    <VBox >
+                                        <ff:Card press="onBtnPressInspectionType" width="7rem" height="7rem" class="customeListBackGround" id="accessoriesCardId" semanticRole="ListItem">
+                                            <ff:content>
+                                                <VBox width="100%" class="sapUiSmallMargin">
+
+                                                    <HBox alignItems="Center" justifyContent="Start" class="">
+                                                        <Image src="{imageModel>/path}/image/Acceso.png" id="imgAccessoriesId" width="2rem" height="2rem" />
+                                                    </HBox>
+                                                    <VBox justifyContent="Start" class="sapUiSmallMarginTop">
+                                                        <FlexBox justifyContent="Start">
+                                                            <Text text="{i18n>searchVehicleAccessories}" wrapping="false" class="Cl_DashboardLabel" />
+                                                        </FlexBox>
+                                                    </VBox>
+                                                </VBox>
+                                            </ff:content>
+                                        </ff:Card>
+                                    </VBox>
+                                </VBox>
+                                <VBox class="sapUiTinyMarginBegin sapUiMediumMarginTop">
+                                    <VBox >
+                                        <ff:Card press="onBtnPressInspectionType" width="7rem" height="7rem" class="customeListBackGround" id="changeInfoCardId" semanticRole="ListItem">
+                                            <ff:content>
+                                                <VBox width="100%" class="sapUiSmallMargin">
+
+                                                    <HBox alignItems="Center" justifyContent="Start" class="">
+                                                        <Image src="{imageModel>/path}/image/ChangeInfo.png" id="imgchangeInfoId" width="2rem" height="2rem" />
+                                                    </HBox>
+                                                    <VBox justifyContent="Start" class="sapUiSmallMarginTop">
+                                                        <FlexBox justifyContent="Start">
+                                                            <Text text="{i18n>searchVehicleChangeInfo}" wrapping="false" class="Cl_DashboardLabel" />
+                                                        </FlexBox>
+                                                    </VBox>
+                                                </VBox>
+                                            </ff:content>
+                                        </ff:Card>
+                                    </VBox>
+
+                                </VBox>
+                                <VBox class="sapUiTinyMarginBegin sapUiMediumMarginTop">
+                                    <VBox >
+                                        <ff:Card press="onPressReTest" width="7rem" height="7rem" class="customeListBackGround" id="reTestCardId" semanticRole="ListItem">
+                                            <ff:content>
+                                                <VBox width="100%" class="sapUiSmallMargin">
+
+                                                    <HBox alignItems="Center" justifyContent="Start" class="">
+                                                        <Image src="{imageModel>/path}/image/Re-Test.png" id="imgreTestId" width="2rem" height="2rem" />
+                                                    </HBox>
+                                                    <VBox justifyContent="Start" class="sapUiSmallMarginTop">
+                                                        <FlexBox justifyContent="Start">
+                                                            <Text text="{i18n>searchVehicleRe-Test} " wrapping="false" class="Cl_DashboardLabel" />
+                                                        </FlexBox>
+                                                    </VBox>
+                                                </VBox>
+                                            </ff:content>
+                                        </ff:Card>
+                                    </VBox>
+
+                                </VBox>
+                                <VBox class="sapUiTinyMarginBegin sapUiMediumMarginTop">
+                                    <VBox >
+                                        <ff:Card press="onBtnPressAllServices" width="7rem" height="7rem" class="customeListBackGround" id="allServiceCardId" semanticRole="ListItem">
+                                            <ff:content>
+                                                <VBox width="100%" class="sapUiSmallMargin">
+
+                                                    <HBox alignItems="Center" justifyContent="Start" class="">
+                                                        <Image src="{imageModel>/path}/image/AllServieced.png" id="imgallServiceId" width="2rem" height="2rem" />
+                                                    </HBox>
+                                                    <VBox justifyContent="Start" class="sapUiSmallMarginTop">
+                                                        <FlexBox justifyContent="Start">
+                                                            <Text text="{i18n>searchVehicleViewMore}" wrapping="false" class="Cl_DashboardLabel" />
+                                                        </FlexBox>
+                                                    </VBox>
+                                                </VBox>
+                                            </ff:content>
+                                        </ff:Card>
+                                    </VBox>
+
+                                </VBox>
+                            </HBox>
+                        </l:BlockLayoutCell>
+                    </l:BlockLayoutRow>
+
+                </l:BlockLayout>
+            </l:VerticalLayout>
+        </content>
+    </Page>
+
+
+</mvc:View>

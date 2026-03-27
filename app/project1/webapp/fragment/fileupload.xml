@@ -1,0 +1,54 @@
+<core:FragmentDefinition xmlns="sap.m"
+    xmlns:core="sap.ui.core"
+    xmlns:f="sap.ui.layout.form"
+    xmlns:l="sap.ui.layout"
+    xmlns:u="sap.ui.unified"
+    xmlns:commons="sap.suite.ui.commons"
+    xmlns:card="sap.f.cards">
+    <Dialog draggable="true" contentHeight="100%" contentWidth="75%" id="FileUploadDialog" title="{i18n>fileUpload_Title}" class="sapUiContentPadding service_test">
+        <customHeader >
+            <Toolbar>
+                <ToolbarSpacer/>
+                <Text text="{i18n>fileUpload_Title}" textAlign="Center" class="Cl_Dialog_titile"/>
+                <ToolbarSpacer/>
+                <Button icon="sap-icon://decline" type="Neutral" press="onBtnPressCloseFileUpload" class="cl_Neutralbtn"/>
+            </Toolbar>
+        </customHeader>
+        <content>
+
+            <Table id="uploadTable" items="{FileUploadedModel>/FileCategory}" class="dialogMList">
+                <columns>
+                    <Column width="17rem">
+                        <Label text="{i18n>fileUpload_Category}" />
+                    </Column>
+
+                    <Column width="12rem">
+                        <Label text="{i18n>fileUpload_FileSelection}" />
+                    </Column>
+                    <!-- <Column width="6rem">
+                        <Label text="Count" />
+                    </Column> -->
+                    <Column width="4rem">
+                        <Label text="{i18n>fileUpload_Capture}" />
+                    </Column>
+                </columns>
+
+                <items>
+                    <ColumnListItem>
+                        <cells>
+                            <Text text="{FileUploadedModel>CategoryName} / {FileUploadedModel>CategoryNameArabic}" width="15rem"/>
+                            <u:FileUploader name="myFileUpload" change="onBtnPressTrafficFileChange" uploadComplete="handleUploadComplete" placeholder="Choose file" useMultipart="true" mimeType="image/png,image/jpeg,application/pdf" sameFilenameAllowed="true" uploadUrl="/upload" multiple="true" class="sapUiSmallMarginBegin sapUiContentPadding" fileType="png,jpg,jpeg,pdf" maximumFileSize="10240"/>
+                            <Button class="cl_TransparentIconFix" icon="{imageModel>/path}/image/attachment-camera.svg" press="onOpenCameraDialog" tooltip="Capture and Upload Image" type="{ path: 'FileUploadedModel>Files', formatter: '.isCameraCaptured' }"/>
+                        </cells>
+                    </ColumnListItem>
+                </items>
+            </Table>
+        </content>
+        <footer>
+            <OverflowToolbar id="fileUploadFooter">
+                <ToolbarSpacer />
+                <Button type="Emphasized" text="{i18n>fileUpload_Save}" press="onBtnPressSaveAttachmentFiles" class="cl_Emphasizebtn"/>
+            </OverflowToolbar>
+        </footer>
+    </Dialog>
+</core:FragmentDefinition>

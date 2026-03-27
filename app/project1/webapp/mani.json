@@ -1,0 +1,1114 @@
+{
+  "_version": "1.65.0",
+  "sap.app": {
+    "id": "adnoc.vi.vehicleinspection",
+    "type": "application",
+    "i18n": "i18n/i18n.properties",
+    "applicationVersion": {
+      "version": "1.0.1"
+    },
+    "title": "{{appTitle}}",
+    "description": "{{appDescription}}",
+    "resources": "resources.json",
+    "sourceTemplate": {
+      "id": "@sap/generator-fiori:basic",
+      "version": "1.16.4",
+      "toolsId": "4f7ca00d-4d1a-4446-b9bb-9151d5596359"
+    },
+    "dataSources": {
+      "VehicleinspectionService": {
+        "uri": "/odata/v2/vehicleinspection/",
+        "type": "OData",
+        "settings": {
+          "odataVersion": "2.0"
+        }
+      },
+      "oGlobalmodel_alias": {
+        "uri": "modone/model/GlobalModel.json",
+        "type": "JSON"
+      },
+      "ReTestModel_alias": {
+        "uri": "modone/model/ReTestModel.json",
+        "type": "JSON"
+      },
+      "RePrintModel_alias": {
+        "uri": "modone/model/RePrintModel.json",
+        "type": "JSON"
+      },
+      "ReTestSearchModel_alias": {
+        "uri": "modone/model/ReTestSearchModel.json",
+        "type": "JSON"
+      },
+      "RePrintSearchModel_alias": {
+        "uri": "modone/model/RePrintSearchModel.json",
+        "type": "JSON"
+      },
+      "SalesOrderEntryRes_alias": {
+        "uri": "modone/model/SalesOrderEntryResponse.json",
+        "type": "JSON"
+      },
+      "ServicesViewModel_alias": {
+        "uri": "modone/model/ServiceViewModel.json",
+        "type": "JSON"
+      },
+      "TrafficAttachment_alias": {
+        "uri": "modone/model/TrafficAttachmentModel.json",
+        "type": "JSON"
+      },
+      "FileUploaded_alias": {
+        "uri": "modone/model/FileUploadModel.json",
+        "type": "JSON"
+      },
+      "FileView_alias": {
+        "uri": "modone/model/FileViewModel.json",
+        "type": "JSON"
+      },
+      "CustomerTypeModel_alias": {
+        "uri": "modone/model/CustomerTypeModel.json",
+        "type": "JSON"
+      },
+      "FetchVehicleModel_alias": {
+        "uri": "modone/model/FetchVehicleModel.json",
+        "type": "JSON"
+      },
+      "PaymentViewModel_alias": {
+        "uri": "modone/model/PaymentViewModel.json",
+        "type": "JSON"
+      },
+      "SalesOrderCardDataModel_alias": {
+        "uri": "modone/model/SalesOrderCardModel.json",
+        "type": "JSON"
+      },
+      "CustomerCreateEntryForm_alias": {
+        "uri": "modone/model/CustomerCreateEntryForm.json",
+        "type": "JSON"
+      },
+      "CustomerCreateSaveRequest_alias": {
+        "uri": "modone/model/CustomerCreateSaveRequest.json",
+        "type": "JSON"
+      },
+      "FileUploadModifiedModel_alias": {
+        "uri": "modone/model/FileUploadModifiedModel.json",
+        "type": "JSON"
+      },
+      "FileViewModified_alias": {
+        "uri": "modone/model/FileViewModifiedModel.json",
+        "type": "JSON"
+      },
+      "ModifiedAttachmentModel_alias": {
+        "uri": "modone/model/ModifiedAttachmentModel.json",
+        "type": "JSON"
+      },
+      "ModifiedInspectionInformationModel_alias": {
+        "uri": "modone/model/ModifiedInspectionInformationModel.json",
+        "type": "JSON"
+      },
+      "CustomerCreateSaveRequestModel_alias": {
+        "uri": "modone/model/CustomerCreateSaveRequest.json",
+        "type": "JSON"
+      },
+      "PermitResultSaveModel_alias": {
+        "uri": "modone/model/PermitResultSaveModel.json",
+        "type": "JSON"
+      },
+      "BackToSearchVehicleModel_alias": {
+        "uri": "modone/model/BackToSearchVehicleFlag.json",
+        "type": "JSON"
+      },
+      "VisibleButtonClickedDataModel_alias": {
+        "uri": "modone/model/VisibleButtonClickedDataModel.json",
+        "type": "JSON"
+      },
+      "AccessoriesSearchModel_alias": {
+        "uri": "modone/model/AccessoriesSearchModel.json",
+        "type": "JSON"
+      },
+      "CustomerDetailModel_alias": {
+        "uri": "modone/model/CustomerDetail.json",
+        "type": "JSON"
+      },
+      "VehicleDetailModel_alias": {
+        "uri": "modone/model/VehicleDetail.json",
+        "type": "JSON"
+      },
+      "VisualSaveAndComfirmModel_alias": {
+        "uri": "modone/model/VisualSaveAndComfirmModel.json",
+        "type": "JSON"
+      },
+      "OrderProccessingButtonsEnableModel_alias": {
+        "uri": "modone/model/OrderProccessingButtonsEnableModel.json",
+        "type": "JSON"
+      },
+      "ViewModel_alias": {
+        "uri": "modone/model/ViewModelPermitOrderProccessingModel.json",
+        "type": "JSON"
+      }
+    },
+    "crossNavigation": {
+      "inbounds": {
+        "vehicleinspection-manage": {
+          "semanticObject": "vehicleinspection",
+          "action": "manage",
+          "title": "{{flpTitle}}",
+          "signature": {
+            "parameters": {},
+            "additionalParameters": "allowed"
+          }
+        }
+      }
+    }
+  },
+  "sap.ui": {
+    "technology": "UI5",
+    "icons": {
+      "icon": "",
+      "favIcon": "",
+      "phone": "",
+      "phone@2": "",
+      "tablet": "",
+      "tablet@2": ""
+    },
+    "deviceTypes": {
+      "desktop": true,
+      "tablet": true,
+      "phone": true
+    }
+  },
+  "sap.ui5": {
+    "flexEnabled": false,
+    "dependencies": {
+      "minUI5Version": "1.133.0",
+      "libs": {
+        "sap.m": {},
+        "sap.ui.core": {},
+        "sap.f": {},
+        "sap.ui.fl": {},
+        "sap.ui.mdc": {},
+        "sap.ui.table": {}
+      }
+    },
+    "contentDensities": {
+      "compact": true,
+      "cozy": true
+    },
+    "models": {
+      "i18n": {
+        "type": "sap.ui.model.resource.ResourceModel",
+        "settings": {
+          "bundleName": "adnoc.vi.vehicleinspection.i18n.i18n"
+        }
+      },
+      "VehicleinspectionService": {
+        "type": "sap.ui.model.odata.v2.ODataModel",
+        "dataSource": "VehicleinspectionService",
+        "preload": true,
+        "settings": {
+          "defaultBindingMode": "TwoWay",
+          "synchronizationMode": "None",
+          "operationMode": "Server",
+          "autoExpandSelect": true,
+          "earlyRequests": true,
+          "useBatch": true
+        }
+      },
+      "oGlobalModel": {
+        "type": "sap.ui.model.json.JSONModel",
+        "dataSource": "oGlobalmodel_alias"
+      },
+      "ReTestModel": {
+        "type": "sap.ui.model.json.JSONModel",
+        "dataSource": "ReTestModel_alias"
+      },
+      "RePrintModel": {
+        "type": "sap.ui.model.json.JSONModel",
+        "dataSource": "RePrintModel_alias"
+      },
+      "ReTestSearchModel": {
+        "type": "sap.ui.model.json.JSONModel",
+        "dataSource": "ReTestSearchModel_alias"
+      },
+      "RePrintSearchModel": {
+        "type": "sap.ui.model.json.JSONModel",
+        "dataSource": "RePrintSearchModel_alias"
+      },
+      "SalesOrderEntryRes": {
+        "type": "sap.ui.model.json.JSONModel",
+        "dataSource": "SalesOrderEntryRes_alias"
+      },
+      "ServicesViewModel": {
+        "type": "sap.ui.model.json.JSONModel",
+        "dataSource": "ServicesViewModel_alias"
+      },
+      "TrafficAttachFileModel": {
+        "type": "sap.ui.model.json.JSONModel",
+        "dataSource": "TrafficAttachment_alias"
+      },
+      "FileUploadedModel": {
+        "type": "sap.ui.model.json.JSONModel",
+        "dataSource": "FileUploaded_alias"
+      },
+      "FileViewModel": {
+        "type": "sap.ui.model.json.JSONModel",
+        "dataSource": "FileView_alias"
+      },
+      "CustomerTypeModel": {
+        "type": "sap.ui.model.json.JSONModel",
+        "dataSource": "CustomerTypeModel_alias"
+      },
+      "FetchVehicleModel": {
+        "type": "sap.ui.model.json.JSONModel",
+        "dataSource": "FetchVehicleModel_alias"
+      },
+      "PaymentViewModel": {
+        "type": "sap.ui.model.json.JSONModel",
+        "dataSource": "PaymentViewModel_alias"
+      },
+      "SalesOrderCardDataModel": {
+        "type": "sap.ui.model.json.JSONModel",
+        "dataSource": "SalesOrderCardDataModel_alias"
+      },
+      "CustomerCreateEntryFormModel": {
+        "type": "sap.ui.model.json.JSONModel",
+        "dataSource": "CustomerCreateEntryForm_alias"
+      },
+      "FileUploadModifiedModel": {
+        "type": "sap.ui.model.json.JSONModel",
+        "dataSource": "FileUploadModifiedModel_alias"
+      },
+      "FileViewModifiedModel": {
+        "type": "sap.ui.model.json.JSONModel",
+        "dataSource": "FileViewModified_alias"
+      },
+      "ModifiedAttachmentModel": {
+        "type": "sap.ui.model.json.JSONModel",
+        "dataSource": "ModifiedAttachmentModel_alias"
+      },
+      "ModifiedInspectionInformationModel": {
+        "type": "sap.ui.model.json.JSONModel",
+        "dataSource": "ModifiedInspectionInformationModel_alias"
+      },
+      "CustomerCreateSaveRequestModel": {
+        "type": "sap.ui.model.json.JSONModel",
+        "dataSource": "CustomerCreateSaveRequestModel_alias"
+      },
+      "CustomerCreateGetRequestModel": {
+        "type": "sap.ui.model.json.JSONModel",
+        "dataSource": "CustomerCreateEntryForm_alias"
+      },
+      "PermitResultSaveModel": {
+        "type": "sap.ui.model.json.JSONModel",
+        "dataSource": "PermitResultSaveModel_alias"
+      },
+      "BackToSearchVehicleModel": {
+        "type": "sap.ui.model.json.JSONModel",
+        "dataSource": "BackToSearchVehicleModel_alias"
+      },
+      "VisibleButtonClickedDataModel": {
+        "type": "sap.ui.model.json.JSONModel",
+        "dataSource": "VisibleButtonClickedDataModel_alias"
+      },
+      "AccessoriesSearchModel": {
+        "type": "sap.ui.model.json.JSONModel",
+        "dataSource": "AccessoriesSearchModel_alias"
+      },
+      "VehicleDetailModel": {
+        "type": "sap.ui.model.json.JSONModel",
+        "dataSource": "VehicleDetailModel_alias"
+      },
+      "CustomerDetailModel": {
+        "type": "sap.ui.model.json.JSONModel",
+        "dataSource": "CustomerDetailModel_alias"
+      },
+      "VisualSaveAndComfirmModel": {
+        "type": "sap.ui.model.json.JSONModel",
+        "dataSource": "VisualSaveAndComfirmModel_alias"
+      },
+       "OrderProccessingButtonsEnableModel": {
+        "type": "sap.ui.model.json.JSONModel",
+        "dataSource": "OrderProccessingButtonsEnableModel_alias"
+      },
+       "viewModel": {
+        "type": "sap.ui.model.json.JSONModel",
+        "dataSource": "ViewModel_alias"
+      }
+    },
+    "resources": {
+      "configuration": {
+        "xx-cachebuster": true
+      },
+      "css": [
+        {
+          "uri": "css/style.css"
+        }
+      ],
+      "Font": [
+        {
+          "uri": "Font/ADNOC_Sans_Bold.ttf"
+        },
+        {
+          "uri": "Font/ADNOC_Sans_Regular.ttf"
+        }
+      ],
+      "js": [
+        {
+          "uri": "ExtnLib/jspdf.umd.min.js"
+        },
+        {
+          "uri": "ExtnLib/jspdf.plugin.autotable.min.js"
+        },
+        {
+          "uri": "libs/crypto.js"
+        }
+      ]
+    },
+    "routing": {
+      "config": {
+        "routerClass": "sap.m.routing.Router",
+        "controlAggregation": "pages",
+        "controlId": "app",
+        "async": true,
+        "transition": "slide",
+        "type": "View",
+        "viewType": "XML",
+        "viewPath": "adnoc.vi.vehicleinspection.view"
+      },
+      "routes": [
+        {
+          "name": "View1",
+          "pattern": "View1",
+          "target": [
+            "TargetView1"
+          ]
+        },
+        {
+          "name": "RouteLanding",
+          "pattern": "RouteLanding",
+          "viewPath": "adnoc.vi.vehicleinspection.modone.view",
+          "target": [
+            "TargetLanding"
+          ]
+        },
+        {
+          "name": "RouteLogin",
+          "pattern": "RouteLogin",
+          "viewPath": "adnoc.vi.vehicleinspection.modone.view",
+          "target": [
+            "TargetLogin"
+          ]
+        },
+        {
+          "name": "Routesync",
+          "pattern": "Routesync",
+          "viewPath": "adnoc.vi.vehicleinspection.modone.view",
+          "target": [
+            "sync"
+          ]
+        },
+        {
+          "name": "RouteCustomerCreate_backup",
+          "pattern": "RouteCustomerCreate_backup",
+          "viewPath": "adnoc.vi.vehicleinspection.modone.view",
+          "target": [
+            "CustomerCreate"
+          ]
+        },
+        {
+          "name": "RouteServices",
+          "pattern": "RouteServices/{from}",
+          "viewPath": "adnoc.vi.vehicleinspection.modone.view",
+          "target": [
+            "TargetServices"
+          ]
+        },
+        {
+          "name": "RouteOpenService",
+          "pattern": "RouteOpenService",
+          "viewPath": "adnoc.vi.vehicleinspection.modone.view",
+          "target": [
+            "TargetOpenService"
+          ]
+        },
+        {
+          "name": "RouteChangeVehicleInfo",
+          "pattern": "RouteChangeVehicleInfo",
+          "viewPath": "adnoc.vi.vehicleinspection.modone.view",
+          "target": [
+            "TargetRouteChangeVehicleInfo"
+          ]
+        },
+        {
+          "name": "Search",
+          "pattern": "Search",
+          "viewPath": "adnoc.vi.vehicleinspection.modone.view",
+          "target": [
+            "TargetSearch"
+          ]
+        },
+        {
+          "name": "Employee",
+          "pattern": "Employee/{type}",
+          "viewPath": "adnoc.vi.vehicleinspection.modone.view",
+          "target": [
+            "TargetEmployee"
+          ]
+        },
+        {
+          "name": "Shift",
+          "pattern": "Shift",
+          "viewPath": "adnoc.vi.vehicleinspection.modone.view",
+          "target": [
+            "TargetShift"
+          ]
+        },
+        {
+          "name": "RouteEmployeeTransfer",
+          "pattern": "Employee/{type}/Transfer",
+          "viewPath": "adnoc.vi.vehicleinspection.modone.view",
+          "target": [
+            "TargetEmployeeDetail"
+          ]
+        },
+        {
+          "name": "RouteShiftDetail",
+          "pattern": "RouteShiftDetail",
+          "viewPath": "adnoc.vi.vehicleinspection.modone.view",
+          "target": [
+            "TargetShiftDetail"
+          ]
+        },
+        {
+          "name": "PendingRequest",
+          "pattern": "PendingRequest",
+          "viewPath": "adnoc.vi.vehicleinspection.modone.view",
+          "target": [
+            "TagretPendingRequest"
+          ]
+        },
+        {
+          "name": "RouteCustomerCreate",
+          "pattern": "RouteCustomerCreate",
+          "viewPath": "adnoc.vi.vehicleinspection.modone.view",
+          "target": [
+            "TargetCreateCustomer"
+          ]
+        },
+        {
+          "name": "RouteCustomerMaster",
+          "pattern": "RouteCustomerMaster:?query:",
+          "viewPath": "adnoc.vi.vehicleinspection.modone.view",
+          "target": [
+            "TargetCustomerMaster"
+          ]
+        },
+        {
+          "name": "Inspection",
+          "pattern": "Inspection",
+          "viewPath": "adnoc.vi.vehicleinspection.modone.view",
+          "target": [
+            "TargetInspection"
+          ]
+        },
+        {
+          "name": "InspectionTemp",
+          "pattern": "InspectionTemp",
+          "viewPath": "adnoc.vi.vehicleinspection.modone.view",
+          "target": [
+            "TargetInspectionTemp"
+          ]
+        },
+        {
+          "name": "RouteHome",
+          "pattern": "RouteHome",
+          "viewPath": "adnoc.vi.vehicleinspection.modone.view",
+          "target": [
+            "TargetHome"
+          ]
+        },
+        {
+          "name": "MainmenuView",
+          "pattern": "MainmenuView",
+          "viewPath": "adnoc.vi.vehicleinspection.modone.view",
+          "target": [
+            "TargetMainmenuView"
+          ]
+        },
+        {
+          "name": "RoutePaymentIntegration",
+          "pattern": "RoutePaymentIntegration/{source}",
+          "viewPath": "adnoc.vi.vehicleinspection.modone.view",
+          "target": [
+            "TargetPaymentIntegration"
+          ]
+        },
+        {
+          "name": "RouteVehicleDetail",
+          "pattern": "RouteVehicleDetail",
+          "viewPath": "adnoc.vi.vehicleinspection.modone.view",
+          "target": [
+            "TargetVehicleDetail"
+          ]
+        },
+        {
+          "name": "RouteCustomerDetail",
+          "pattern": "RouteCustomerDetail",
+          "viewPath": "adnoc.vi.vehicleinspection.modone.view",
+          "target": [
+            "TargetCustomerDetail"
+          ]
+        },
+        {
+          "name": "RouteServiceTest",
+          "pattern": "RouteServiceTest",
+          "titleTarget": "",
+          "viewPath": "adnoc.vi.vehicleinspection.modone.view",
+          "target": [
+            "TargetServiceTest"
+          ]
+        },
+        {
+          "name": "RouteAdobeForm",
+          "pattern": "RouteAdobeForm",
+          "titleTarget": "",
+          "viewPath": "adnoc.vi.vehicleinspection.modone.view",
+          "target": [
+            "TargetAdobeForm"
+          ]
+        },
+        {
+          "name": "RouteSMSSummaryReport",
+          "pattern": "RouteSMSSummaryReport",
+          "titleTarget": "",
+          "viewPath": "adnoc.vi.vehicleinspection.modone.view",
+          "target": [
+            "TargetSMSSummaryReport"
+          ]
+        },
+        {
+          "name": "RouteOrderSummaryInput",
+          "pattern": "RouteOrderSummaryInput",
+          "titleTarget": "",
+          "viewPath": "adnoc.vi.vehicleinspection.modone.view",
+          "target": [
+            "TargetOrderSummaryInput"
+          ]
+        },
+        {
+          "name": "PaymentDetails",
+          "pattern": "PaymentDetails",
+          "titleTarget": "",
+          "viewPath": "adnoc.vi.vehicleinspection.modone.view",
+          "target": [
+            "TargetPaymentDetails"
+          ]
+        },
+        {
+          "name": "RouteSearchVehicle",
+          "pattern": "RouteSearchVehicle",
+          "titleTarget": "",
+          "viewPath": "adnoc.vi.vehicleinspection.modone.view",
+          "target": [
+            "TargetSearchVehicle"
+          ]
+        },
+        {
+          "name": "OpenOrders",
+          "pattern": "OpenOrders",
+          "titleTarget": "",
+          "viewPath": "adnoc.vi.vehicleinspection.modone.view",
+          "target": [
+            "TargetOpenOrders"
+          ]
+        },
+        {
+          "name": "OrdersForApproval",
+          "pattern": "OrdersForApproval",
+          "titleTarget": "",
+          "viewPath": "adnoc.vi.vehicleinspection.modone.view",
+          "target": [
+            "TargetOrdersForApproval"
+          ]
+        },
+        {
+          "name": "EquipmentPassword",
+          "pattern": "EquipmentPassword",
+          "titleTarget": "",
+          "viewPath": "adnoc.vi.vehicleinspection.modone.view",
+          "target": [
+            "TargetEquipmentPassword"
+          ]
+        },
+        {
+          "name": "CountryMaster",
+          "pattern": "CountryMaster",
+          "titleTarget": "",
+          "viewPath": "adnoc.vi.vehicleinspection.modone.view",
+          "target": [
+            "TargetCountryMaster"
+          ]
+        },
+        {
+          "name": "Sync",
+          "pattern": "Sync",
+          "titleTarget": "",
+          "viewPath": "adnoc.vi.vehicleinspection.modone.view",
+          "target": [
+            "TargetRouteSync"
+          ]
+        },
+        {
+          "name": "CountryMasterEdit",
+          "pattern": "CountryMasterEdit",
+          "titleTarget": "",
+          "viewPath": "adnoc.vi.vehicleinspection.modone.view",
+          "target": [
+            "TargetCountryMasterEdit"
+          ]
+        },
+        {
+          "name": "RouteCertificateSearch",
+          "pattern": "RouteCertificateSearch",
+          "titleTarget": "",
+          "viewPath": "adnoc.vi.vehicleinspection.modone.view",
+          "target": [
+            "TargetCertificateSearch"
+          ]
+        },
+        {
+          "name": "RouteOrderProcessing",
+          "pattern": "RouteOrderProcessing",
+          "titleTarget": "",
+          "viewPath": "adnoc.vi.vehicleinspection.modone.view",
+          "target": [
+            "TargetOrderProcessing"
+          ]
+        },
+        {
+          "name": "RouteOrderProcessing",
+          "pattern": "RouteOrderProcessing/{fromScreen}",
+          "titleTarget": "",
+          "viewPath": "adnoc.vi.vehicleinspection.modone.view",
+          "target": [
+            "TargetOrderProcessing"
+          ]
+        },
+        {
+          "name": "OrderReport",
+          "pattern": "OrderReport",
+          "titleTarget": "",
+          "viewPath": "adnoc.vi.vehicleinspection.modone.view",
+          "target": [
+            "TargetOrderReport"
+          ]
+        },
+        {
+          "name": "RouteVisualInspection",
+          "pattern": "RouteVisualInspection",
+          "titleTarget": "",
+          "viewPath": "adnoc.vi.vehicleinspection.modone.view",
+          "target": [
+            "TargetVisualInspection"
+          ]
+        },
+        {
+          "name": "RouteAccessoriesSearch",
+          "pattern": "RouteAccessoriesSearch",
+          "titleTarget": "",
+          "viewPath": "adnoc.vi.vehicleinspection.modone.view",
+          "target": [
+            "TargetAccessoriesSearch"
+          ]
+        },
+        {
+          "name": "RouteAccessoriesList",
+          "pattern": "RouteAccessoriesList",
+          "titleTarget": "",
+          "viewPath": "adnoc.vi.vehicleinspection.modone.view",
+          "target": [
+            "TargetAccessoriesList"
+          ]
+        },
+        
+        {
+          "name": "V_CharTestRount",
+          "pattern": "V_CharTestRount",
+          "titleTarget": "",
+          "viewPath": "adnoc.vi.vehicleinspection.modone.view",
+          "target": [
+            "TargetV_CharTestRount"
+          ]
+        },
+        {
+          "name": "RouteAccessoriesOrderProccessing",
+          "pattern": "RouteAccessoriesOrderProccessing",
+          "titleTarget": "",
+          "viewPath": "adnoc.vi.vehicleinspection.modone.view",
+          "target": [
+            "TargetAccessoriesOrderProccessing"
+          ]
+        },
+        {
+          "name": "OrderRefund",
+          "pattern": "OrderRefund",
+          "titleTarget": "",
+          "viewPath": "adnoc.vi.vehicleinspection.modone.view",
+          "target": [
+            "TargetOrderRefund"
+          ]
+        },
+        {
+          "name": "notFound",
+          "pattern": ":all*:",
+          "target": "TargetNotFound"
+        }
+      ],
+      "targets": {
+        "TargetOrderReport": {
+          "viewId": "OrderReport",
+          "viewName": "OrderReport",
+          "viewType": "XML",
+          "transition": "slide",
+          "clearControlAggregation": false,
+          "viewPath": "adnoc.vi.vehicleinspection.modone.view"
+        },
+        "TargetServices": {
+          "viewId": "Services",
+          "viewName": "Services",
+          "viewType": "XML",
+          "transition": "slide",
+          "clearControlAggregation": false,
+          "viewPath": "adnoc.vi.vehicleinspection.modone.view"
+        },
+        "TargetPaymentDetails": {
+          "viewId": "PaymentDetails",
+          "viewName": "PaymentDetails",
+          "viewType": "XML",
+          "transition": "slide",
+          "clearControlAggregation": false,
+          "viewPath": "adnoc.vi.vehicleinspection.modone.view"
+        },
+        "TargetLanding": {
+          "viewId": "Landing",
+          "viewName": "Landing",
+          "viewType": "XML",
+          "transition": "slide",
+          "clearControlAggregation": false,
+          "viewPath": "adnoc.vi.vehicleinspection.modone.view"
+        },
+        "TargetAdobeForm": {
+          "viewId": "AdobeForm",
+          "viewName": "AdobeForm",
+          "viewType": "XML",
+          "transition": "slide",
+          "clearControlAggregation": false,
+          "viewPath": "adnoc.vi.vehicleinspection.modone.view"
+        },
+        "TargetLogin": {
+          "viewId": "Login",
+          "viewName": "Login",
+          "viewType": "XML",
+          "transition": "slide",
+          "clearControlAggregation": false,
+          "viewPath": "adnoc.vi.vehicleinspection.modone.view"
+        },
+        "TargetHome": {
+          "viewType": "XML",
+          "transition": "slide",
+          "clearControlAggregation": false,
+          "viewId": "Home",
+          "viewName": "Home",
+          "viewPath": "adnoc.vi.vehicleinspection.modone.view"
+        },
+        "TargetCreateCustomer": {
+          "viewId": "CreateCustomer",
+          "viewName": "CreateCustomer",
+          "viewType": "XML",
+          "transition": "slide",
+          "clearControlAggregation": false,
+          "viewPath": "adnoc.vi.vehicleinspection.modone.view"
+        },
+        "TargetCustomerMaster": {
+          "viewId": "CustomerMaster",
+          "viewName": "CustomerMaster",
+          "viewType": "XML",
+          "transition": "slide",
+          "clearControlAggregation": false,
+          "viewPath": "adnoc.vi.vehicleinspection.modone.view"
+        },
+        "TargetPaymentIntegration": {
+          "viewId": "PaymentIntegration",
+          "viewName": "PaymentIntegration",
+          "viewType": "XML",
+          "transition": "slide",
+          "clearControlAggregation": false,
+          "viewPath": "adnoc.vi.vehicleinspection.modone.view"
+        },
+        "TargetOpenService": {
+          "viewId": "OpenServiceRequest",
+          "viewName": "OpenServiceRequest",
+          "viewType": "XML",
+          "transition": "slide",
+          "clearControlAggregation": false,
+          "viewPath": "adnoc.vi.vehicleinspection.modone.view"
+        },
+        "TargetRouteChangeVehicleInfo": {
+          "viewId": "ChangeVehicleInfo",
+          "viewName": "ChangeVehicleInfo",
+          "viewType": "XML",
+          "transition": "slide",
+          "clearControlAggregation": false,
+          "viewPath": "adnoc.vi.vehicleinspection.modone.view"
+        },
+        "TargetView1": {
+          "viewType": "XML",
+          "viewName": "SearchVehicle",
+          "viewId": "SearchVehicleId",
+          "clearControlAggregation": false
+        },
+        "MainmenuView": {
+          "viewType": "XML",
+          "transition": "slide",
+          "clearAggregation": true,
+          "viewName": "MainmenuView"
+        },
+        "TargetSearch": {
+          "viewType": "XML",
+          "transition": "slide",
+          "clearAggregation": true,
+          "viewName": "Search",
+          "viewPath": "adnoc.vi.vehicleinspection.modone.view"
+        },
+        "TargetEmployee": {
+          "viewType": "XML",
+          "transition": "slide",
+          "clearAggregation": true,
+          "viewName": "Employee",
+          "viewPath": "adnoc.vi.vehicleinspection.modone.view"
+        },
+        "TargetShift": {
+          "viewType": "XML",
+          "transition": "slide",
+          "clearAggregation": true,
+          "viewName": "Shift",
+          "viewPath": "adnoc.vi.vehicleinspection.modone.view"
+        },
+        "TargetEmployeeDetail": {
+          "viewType": "XML",
+          "transition": "slide",
+          "clearAggregation": true,
+          "viewName": "EmployeeTransfer",
+          "viewPath": "adnoc.vi.vehicleinspection.modone.view"
+        },
+        "TargetShiftDetail": {
+          "viewType": "XML",
+          "transition": "slide",
+          "clearAggregation": true,
+          "viewName": "ShiftDetail",
+          "viewPath": "adnoc.vi.vehicleinspection.modone.view"
+        },
+        "TagretPendingRequest": {
+          "viewType": "XML",
+          "transition": "slide",
+          "clearAggregation": true,
+          "viewName": "PendingRequest",
+          "viewPath": "adnoc.vi.vehicleinspection.modone.view"
+        },
+        "TargetInspection": {
+          "viewType": "XML",
+          "transition": "slide",
+          "clearAggregation": true,
+          "viewName": "Inspection",
+          "viewPath": "adnoc.vi.vehicleinspection.modone.view"
+        },
+        "TargetInspectionTemp": {
+          "viewType": "XML",
+          "transition": "slide",
+          "clearAggregation": true,
+          "viewId": "InspectionTemp",
+          "viewName": "InspectionTemp",
+          "viewPath": "adnoc.vi.vehicleinspection.modone.view"
+        },
+        "TargetVehicleDetail": {
+          "viewType": "XML",
+          "transition": "slide",
+          "clearAggregation": true,
+          "viewName": "VehicleDetails",
+          "viewPath": "adnoc.vi.vehicleinspection.modone.view"
+        },
+        "TargetCustomerDetail": {
+          "viewType": "XML",
+          "transition": "slide",
+          "clearAggregation": true,
+          "viewName": "CustomerDetails",
+          "viewPath": "adnoc.vi.vehicleinspection.modone.view"
+        },
+        "TargetServiceTest": {
+          "viewType": "XML",
+          "transition": "slide",
+          "clearAggregation": true,
+          "viewName": "ServiceTest",
+          "viewPath": "adnoc.vi.vehicleinspection.modone.view"
+        },
+        "TargetOrderSummaryInput": {
+          "viewType": "XML",
+          "transition": "slide",
+          "clearAggregation": true,
+          "viewName": "OrderSummaryInput",
+          "viewPath": "adnoc.vi.vehicleinspection.modone.view"
+        },
+        "TargetSMSSummaryReport": {
+          "viewType": "XML",
+          "transition": "slide",
+          "clearAggregation": true,
+          "viewName": "SMSSummaryReport",
+          "viewPath": "adnoc.vi.vehicleinspection.modone.view"
+        },
+        "TargetOrderSummaryResult": {
+          "viewType": "XML",
+          "transition": "slide",
+          "clearAggregation": true,
+          "viewName": "OrderSummaryResult",
+          "viewPath": "adnoc.vi.vehicleinspection.modone.view"
+        },
+        "TargetSearchVehicle": {
+          "viewType": "XML",
+          "transition": "slide",
+          "clearAggregation": true,
+          "viewName": "SearchVehicle",
+          "viewId": "SearchVehicleId",
+          "viewPath": "adnoc.vi.vehicleinspection.modone.view"
+        },
+        "TargetCertificateSearch": {
+          "viewType": "XML",
+          "transition": "slide",
+          "clearAggregation": true,
+          "viewName": "CertificateSearch",
+          "viewPath": "adnoc.vi.vehicleinspection.modone.view"
+        },
+        "TargetOrderRefund": {
+          "viewType": "XML",
+          "transition": "slide",
+          "clearAggregation": true,
+          "viewName": "OrderRefund",
+          "viewPath": "adnoc.vi.vehicleinspection.modone.view"
+        },
+        "TargetOrderProcessing": {
+          "viewType": "XML",
+          "transition": "slide",
+          "clearAggregation": true,
+          "viewName": "OrderProcessing",
+          "viewPath": "adnoc.vi.vehicleinspection.modone.view"
+        },
+        "TargetNotFound": {
+          "viewName": "SearchVehicle",
+          "viewType": "XML",
+          "viewId": "notFound"
+        },
+        "TargetOpenOrders": {
+          "viewId": "OpenOrders",
+          "viewName": "OpenOrders",
+          "viewType": "XML",
+          "transition": "slide",
+          "clearControlAggregation": false,
+          "viewPath": "adnoc.vi.vehicleinspection.modone.view"
+        },
+        "TargetOrdersForApproval": {
+          "viewId": "OrdersForApproval",
+          "viewName": "OrdersForApproval",
+          "viewType": "XML",
+          "transition": "slide",
+          "clearControlAggregation": false,
+          "viewPath": "adnoc.vi.vehicleinspection.modone.view"
+        },
+        "TargetEquipmentPassword": {
+          "viewId": "EquipmentPassword",
+          "viewName": "EquipmentPassword",
+          "viewType": "XML",
+          "transition": "slide",
+          "clearControlAggregation": false,
+          "viewPath": "adnoc.vi.vehicleinspection.modone.view"
+        },
+        "TargetCountryMaster": {
+          "viewId": "CountryMaster",
+          "viewName": "CountryMaster",
+          "viewType": "XML",
+          "transition": "slide",
+          "clearControlAggregation": false,
+          "viewPath": "adnoc.vi.vehicleinspection.modone.view"
+        },
+        "TargetRouteSync": {
+          "viewId": "Sync",
+          "viewName": "Sync",
+          "viewType": "XML",
+          "transition": "slide",
+          "clearControlAggregation": false,
+          "viewPath": "adnoc.vi.vehicleinspection.modone.view"
+        },
+        "TargetCountryMasterEdit": {
+          "viewId": "CountryMasterEdit",
+          "viewName": "CountryMasterEdit",
+          "viewType": "XML",
+          "transition": "slide",
+          "clearControlAggregation": false,
+          "viewPath": "adnoc.vi.vehicleinspection.modone.view"
+        },
+        "TargetVisualInspection": {
+          "viewId": "VisualInspection",
+          "viewName": "VisualInspection",
+          "viewType": "XML",
+          "transition": "slide",
+          "clearControlAggregation": false,
+          "viewPath": "adnoc.vi.vehicleinspection.modone.view"
+        },
+        "TargetAccessoriesSearch": {
+          "viewId": "AccessoriesSearch",
+          "viewName": "AccessoriesSearch",
+          "viewType": "XML",
+          "transition": "slide",
+          "clearControlAggregation": false,
+          "viewPath": "adnoc.vi.vehicleinspection.modone.view"
+        },
+        "TargetAccessoriesList": {
+          "viewId": "AccessoriesList",
+          "viewName": "AccessoriesList",
+          "viewType": "XML",
+          "transition": "slide",
+          "clearControlAggregation": false,
+          "viewPath": "adnoc.vi.vehicleinspection.modone.view"
+        },
+        "TargetV_CharTestRount": {
+          "viewId": "Vi_CharTest",
+          "viewName": "Vi_CharTest",
+          "viewType": "XML",
+          "transition": "slide",
+          "clearControlAggregation": false,
+          "viewPath": "adnoc.vi.vehicleinspection.modone.view"
+        },
+        "TargetAccessoriesOrderProccessing": {
+          "viewId": "AccessoriesOrderProccessing",
+          "viewName": "AccessoriesOrderProccessing",
+          "viewType": "XML",
+          "transition": "slide",
+          "clearControlAggregation": false,
+          "viewPath": "adnoc.vi.vehicleinspection.modone.view"
+        },
+        "sync": {
+          "viewId": "sync",
+          "viewName": "sync",
+          "viewType": "XML",
+          "transition": "slide",
+          "clearControlAggregation": false,
+          "viewPath": "adnoc.vi.vehicleinspection.modone.view"
+        }
+      }
+    },
+    "rootView": {
+      "viewName": "adnoc/vi/vehicleinspection/view.MasterApp",
+      "type": "XML",
+      "id": "app"
+    }
+  },
+  "sap.cloud": {
+    "public": true,
+    "service": "vehicleinspection"
+  }
+}
